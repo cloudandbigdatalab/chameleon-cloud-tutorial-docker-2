@@ -1,8 +1,6 @@
 # Chameleon Cloud Tutorial - Docker 2
 
-:warning::warning::warning:  
-**Tutorial Under Development**  
-:warning::warning::warning:
+:warning: **Tutorial Under Development**
 
 This tutorial will cover using Docker Machine and Compose.
 
