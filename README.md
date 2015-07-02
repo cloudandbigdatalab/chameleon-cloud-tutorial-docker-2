@@ -20,7 +20,7 @@ In the first tutorial we spun up Chameleon servers and accessed them directly vi
 
 ### Installing Docker Machine on Your Local System
 
-Docker Machine is available for Linux, OS X, and Windows. See the Docker installation [instructions] (https://docs.docker.com/machine/install-machine/) for your OS. We're going to be using a Mac in our example so we executed the following.
+Docker Machine is available for Linux, OS X, and Windows. See the Docker installation [instructions] (https://docs.docker.com/machine/install-machine/) for your OS. I'm using a Mac in the example and executed the following. *Note, I could not follow the instructions on that page verbatim.* Even with `sudo` the curl command returned `permission denied`. 
 
 ```sh
 curl -L https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_darwin-amd64 > /usr/local/bin/docker-machine
