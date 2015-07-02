@@ -18,7 +18,7 @@ I'm not sure how or if I want to relate these two more together. I think I could
 
 In the first tutorial we spun up Chameleon servers and accessed them directly via SSH. In this tutorial we're going to control them via Docker Machine. This is particularly useful if you're only working with Docker containers.
 
-**I need to figure out OpenStack API information for Chameleon then proceed.**
+**Need to figure out OpenStack API information for Chameleon then proceed.**
 
 ### Installing Docker Machine on Your Local System
 
@@ -28,13 +28,4 @@ Docker Machine is available for Linux, OS X, and Windows. See the Docker install
 curl -L https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_darwin-amd64 > ~/Downloads/docker-machine
 sudo mv ~/Downloads/docker-machine /usr/local/bin/
 chmod +x /usr/local/bin/docker-machine
-```
-
-```sh
-docker-machine create \
---driver generic \
---generic-ip-address 129.114.34.124 \
---generic-ssh-key "$HOME/.ssh/chameleon" \
---generic-ssh-user "cc" \
-chameleon1
 ```
