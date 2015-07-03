@@ -16,9 +16,9 @@ I'm not sure how or if I want to relate these two more together. I think I could
 
 ## Machine
 
-In the first tutorial we spun up Chameleon servers and accessed them directly via SSH. In this tutorial we're going to control them via Docker Machine. This is particularly useful if you're only working with Docker containers.
+:warning: **Need to figure out OpenStack API information for Chameleon then proceed. Using Machine is on hold until I hear back from the Chameleon admin.**
 
-**Need to figure out OpenStack API information for Chameleon then proceed.**
+In the first tutorial we spun up Chameleon servers and accessed them directly via SSH. In this tutorial we're going to control them via Docker Machine. This is particularly useful if you're only working with Docker containers.
 
 ### Installing Docker Machine on Your Local System
 
