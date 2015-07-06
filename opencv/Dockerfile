@@ -2,6 +2,8 @@ FROM ubuntu
 
 MAINTAINER shawnmaten@gmail.com
 
+RUN apt-get update -y
+
 RUN apt-get install -y build-essential
 
 RUN apt-get install -y cmake libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
