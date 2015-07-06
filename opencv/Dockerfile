@@ -18,8 +18,10 @@ RUN curl https://codeload.github.com/Itseez/opencv/tar.gz/3.0.0 > opencv-3.0.0.t
 
 RUN tar -xzvf opencv-3.0.0.tar.gz
 
-RUN curl https://codeload.github.com/Itseez/opencv_contrib/tar.gz/3.0.0 > opencv-3.0.0.tar.gz
+RUN curl https://codeload.github.com/Itseez/opencv_contrib/tar.gz/3.0.0 > opencv_contrib-3.0.0.tar.gz
 
 RUN tar -xzvf opencv_contrib-3.0.0.tar.gz
 
 RUN ls
+
+# RUN rm opencv-3.0.0.tar.gz && rm opencv_contrib-3.0.0.tar.gz
