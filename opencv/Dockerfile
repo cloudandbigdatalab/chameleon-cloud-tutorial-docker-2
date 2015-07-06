@@ -22,6 +22,20 @@ RUN curl https://codeload.github.com/Itseez/opencv_contrib/tar.gz/3.0.0 > opencv
 
 RUN tar -xzvf opencv_contrib-3.0.0.tar.gz
 
-RUN ls
+RUN rm opencv-3.0.0.tar.gz && rm opencv_contrib-3.0.0.tar.gz
 
-# RUN rm opencv-3.0.0.tar.gz && rm opencv_contrib-3.0.0.tar.gz
+WORKDIR /opencv-build/opencv-3.0.0/build/
+
+RUN cmake -D CMAKE_BUILD_TYPE=Release \
+-D CMAKE_INSTALL_PREFIX=/usr/local \
+-D OPENCV_EXTRA_MODULES_PATH=/opencv-build/opencv_contrib-3.0.0/modules/ \
+-D PYTHON2(3)_EXECUTABLE=/usr/bin/python3 \
+-D PYTHON_INCLUDE_DIR=/usr/include/python3.4 \
+-D PYTHON_INCLUDE_DIR2=/usr/include/x86_64-linux-gnu/python3.4m/ \
+-D PYTHON_LIBRARY=/usr/lib/x86_64-linux-gnu/libpython3.4m.so \
+-D PYTHON2(3)_NUMPY_INCLUDE_DIRS=/usr/lib/python3/dist-packages/numpy/core/include/ \
+..
+
+RUN make -j8
+
+RUN make install
