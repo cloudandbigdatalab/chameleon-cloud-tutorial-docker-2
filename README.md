@@ -30,4 +30,12 @@ sudo mv ~/Downloads/docker-machine /usr/local/bin/
 chmod +x /usr/local/bin/docker-machine
 ```
 
-## Compose 
+## Compose
+
+### Modules Composition
+
+Level | Name | Apps Running
+------|------|------------
+1 | http_server | Nginx
+2 | page_generator | uWSGI, Django
+3 | image_processor | uWSGI, Django, OpenCV
