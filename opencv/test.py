@@ -1,5 +1,5 @@
-import cv2
+import c3
 
-print (cv2.__version__)
+print (cv3.__version__)
 
-help(cv2.xfeatures2d)
+help(cv3.xfeatures2d)
