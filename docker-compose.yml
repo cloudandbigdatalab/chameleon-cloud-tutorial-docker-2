@@ -1,0 +1,12 @@
+opencv:
+  build: ./opencv/
+uwsgi:
+  build: ./uwsgi/
+  links:
+    - opencv
+nginx:
+  build: ./nginx/
+  ports:
+    - 80:80
+  links:
+    -uwsgi
