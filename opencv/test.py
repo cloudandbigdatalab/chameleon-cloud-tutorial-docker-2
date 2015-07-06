@@ -1,5 +1,5 @@
-import cv3
+import cv2
 
-print (cv3.__version__)
+print (cv2.__version__)
 
-help(cv3.xfeatures2d)
+help(cv2.xfeatures2d.SIFT_create)
