@@ -32,7 +32,7 @@ chmod +x /usr/local/bin/docker-machine
 
 ## Compose
 
-### Modules Composition
+### Containers in Composition
 
 Level | Name | Apps Running
 ------|------|------------
