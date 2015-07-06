@@ -1,4 +1,4 @@
-import c3
+import cv3
 
 print (cv3.__version__)
 
