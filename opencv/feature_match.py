@@ -4,8 +4,8 @@ import cv2
 
 MIN_MATCH_COUNT = 10
 
-img1 = cv2.imread('toad.png',0)          # queryImage
-img2 = cv2.imread('mario_party.png',0) # trainImage
+img1 = cv2.imread('toad.jpg',0)          # queryImage
+img2 = cv2.imread('mario_party.jpg',0) # trainImage
 
 # Initiate SIFT detector
 sift = cv2.xfeatures2d.SIFT_create()
