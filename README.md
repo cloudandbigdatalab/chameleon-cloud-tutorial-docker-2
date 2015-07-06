@@ -29,3 +29,5 @@ curl -L https://github.com/docker/machine/releases/download/v0.3.0/docker-machin
 sudo mv ~/Downloads/docker-machine /usr/local/bin/
 chmod +x /usr/local/bin/docker-machine
 ```
+
+## Compose 
