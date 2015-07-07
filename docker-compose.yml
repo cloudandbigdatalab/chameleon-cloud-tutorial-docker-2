@@ -1,8 +1,8 @@
-imageProcessor:
-  build: ./imageProcessor
-httpServer:
-  build: ./httpServer
+opencv:
+  build: ./opencv
+nginx:
+  build: ./nginx
   ports:
     - 80:80
   links:
-    - imageProcessor
+    - opencv

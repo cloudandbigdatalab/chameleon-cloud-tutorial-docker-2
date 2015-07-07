@@ -50,6 +50,6 @@ RUN pip install uwsgi psycopg2
 
 EXPOSE 3031
 
-COPY image-processor.ini image-processor.py /image-processor/
+COPY opencv.ini opencv.py /opencv/
 
-CMD /usr/local/bin/uwsgi /image-processor/image-processor.ini
+CMD /usr/local/bin/uwsgi /opencv/opencv.ini
