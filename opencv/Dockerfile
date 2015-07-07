@@ -50,6 +50,6 @@ RUN pip3 install uwsgi
 
 EXPOSE 3031
 
-COPY opencv.ini opencv.py /opencv/
+COPY /opencv/ /opencv/
 
 CMD /usr/local/bin/uwsgi /opencv/opencv.ini
