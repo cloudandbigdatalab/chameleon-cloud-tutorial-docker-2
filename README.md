@@ -38,4 +38,6 @@ Level | Name | Apps Running
 ------|------|------------
 1 | http_server | Nginx
 2 | page_generator | uWSGI, Django
-3 | image_processor | uWSGI, Django, OpenCV
+2 | image_processor | uWSGI, Django, OpenCV
+
+The http_server container will act as the front for both the page_generator and image_processor containers. I think this way I can also set up the image_processor first and test it without the webpage.

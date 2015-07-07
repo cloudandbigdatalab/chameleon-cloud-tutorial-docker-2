@@ -39,3 +39,7 @@ RUN cmake -D CMAKE_BUILD_TYPE=Release \
 RUN make -j8
 
 RUN make install
+
+WORKDIR /
+
+RUN rm -rf /opencv-build
