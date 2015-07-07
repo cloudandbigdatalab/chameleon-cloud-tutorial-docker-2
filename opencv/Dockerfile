@@ -43,3 +43,13 @@ RUN make install
 WORKDIR /
 
 RUN rm -rf /opencv-build
+
+RUN apt-get install -y python3-pip python3-psycopg2
+
+RUN pip install uwsgi psycopg2
+
+EXPOSE 3031
+
+COPY image-processor.ini image-processor.py /image-processor/
+
+CMD /usr/local/bin/uwsgi /image-processor/image-processor.ini
