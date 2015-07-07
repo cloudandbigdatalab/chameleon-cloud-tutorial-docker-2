@@ -1,12 +1,8 @@
-opencv:
-  build: ./opencv/
-uwsgi:
-  build: ./uwsgi/
-  links:
-    - opencv
-nginx:
-  build: ./nginx/
+image-processor:
+  build: ./image-processor/
+http-server:
+  build: ./http-server/
   ports:
     - 80:80
   links:
-    -uwsgi
+    -image-processor

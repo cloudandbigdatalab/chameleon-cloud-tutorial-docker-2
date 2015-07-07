@@ -1,0 +1,9 @@
+server {
+    listen 80;
+    server_name 129.114.34.124;
+    
+    location /image-processor {
+        include uwsgi_params;
+        uwsgi_pass image-processor:3031;
+    }
+}
