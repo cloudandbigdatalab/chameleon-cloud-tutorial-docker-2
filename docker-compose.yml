@@ -1,8 +1,8 @@
-image_processor:
-  build: ./image_processor/
-http_server:
-  build: ./http_server/
+imageProcessor:
+  build: ./imageProcessor/
+httpServer:
+  build: ./httpServer/
   ports:
     - 80:80
   links:
-    -image_processor
+    -imageProcessor
