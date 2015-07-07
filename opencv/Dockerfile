@@ -46,7 +46,7 @@ RUN rm -rf /opencv-build
 
 RUN apt-get install -y python3-pip python3-psycopg2
 
-RUN pip install uwsgi psycopg2
+RUN pip3 install uwsgi psycopg2
 
 EXPOSE 3031
 
