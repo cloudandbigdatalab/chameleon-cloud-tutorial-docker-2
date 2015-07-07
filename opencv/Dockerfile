@@ -44,9 +44,9 @@ WORKDIR /
 
 RUN rm -rf /opencv-build
 
-RUN apt-get install -y python3-pip python3-psycopg2 python-django
+RUN apt-get install -y python3-pip python-django
 
-RUN pip3 install uwsgi psycopg2
+RUN pip3 install uwsgi
 
 EXPOSE 3031
 
