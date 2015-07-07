@@ -5,4 +5,4 @@ nginx:
   ports:
     - 80:80
   links:
-    - opencv
+    - opencv:opencv
