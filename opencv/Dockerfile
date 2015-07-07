@@ -52,4 +52,4 @@ EXPOSE 3031
 
 COPY opencv /
 
-CMD /usr/local/bin/uwsgi /opencv.ini
+CMD /usr/local/bin/uwsgi /opencv/opencv.ini
