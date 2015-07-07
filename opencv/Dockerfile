@@ -44,7 +44,7 @@ WORKDIR /
 
 RUN rm -rf /opencv-build
 
-RUN apt-get install -y python3-pip python3-psycopg2
+RUN apt-get install -y python3-pip python3-psycopg2 python-django
 
 RUN pip3 install uwsgi psycopg2
 
