@@ -5,4 +5,4 @@ httpServer:
   ports:
     - 80:80
   links:
-    -imageProcessor
+    - imageProcessor
