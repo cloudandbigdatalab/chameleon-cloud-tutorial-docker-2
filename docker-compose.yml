@@ -1,7 +1,7 @@
 imageProcessor:
-  build: ./imageProcessor/
+  build: ./imageProcessor
 httpServer:
-  build: ./httpServer/
+  build: ./httpServer
   ports:
     - 80:80
   links:
