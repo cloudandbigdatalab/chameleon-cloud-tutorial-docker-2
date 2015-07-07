@@ -50,7 +50,11 @@ RUN pip3 install uwsgi
 
 EXPOSE 3031
 
-COPY images/ opencv/ feature-match.py manage.py opencv.ini /opencv/
+COPY images /opencv/images/
+
+COPY opencv /opencv/opencv/
+
+COPY feature-match.py manage.py opencv.ini /opencv/
 
 RUN ls /opencv
 
