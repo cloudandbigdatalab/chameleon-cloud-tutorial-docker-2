@@ -56,6 +56,4 @@ COPY opencv /opencv/opencv/
 
 COPY feature-match.py manage.py opencv.ini /opencv/
 
-RUN ls /opencv
-
 CMD /usr/local/bin/uwsgi /opencv/opencv.ini
