@@ -4,8 +4,8 @@ import cv2
 
 MIN_MATCH_COUNT = 10
 
-img1 = cv2.imread('cartridge.jpg',0)          # queryImage
-img2 = cv2.imread('cartridges.jpg',0) # trainImage
+img1 = cv2.imread('./images/cartridge.jpg', 0)  # queryImage
+img2 = cv2.imread('./images/cartridges.jpg', 0)  # trainImage
 
 # Initiate SIFT detector
 sift = cv2.FeatureDetector_create("SIFT")
