@@ -54,6 +54,12 @@ COPY opencv /opencv/opencv/
 
 COPY feature-match.py manage.py opencv.ini /opencv/
 
+WORKDIR /opencv
+
+RUN virtualenv env
+
+RUN . env/bin/activate && pip install uwsgi django
+
 EXPOSE 3031
 
-CMD /usr/local/bin/uwsgi /opencv/opencv.ini
+CMD . env/bin/activate && uwsgi opencv.ini
