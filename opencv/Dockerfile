@@ -44,16 +44,16 @@ WORKDIR /
 
 RUN rm -rf /opencv-build
 
-RUN apt-get install -y python3-pip python-django
+RUN apt-get install -y python3-pip
 
-RUN pip3 install uwsgi
-
-EXPOSE 3031
+RUN pip3 install virtualenv
 
 COPY images /opencv/images/
 
 COPY opencv /opencv/opencv/
 
 COPY feature-match.py manage.py opencv.ini /opencv/
+
+EXPOSE 3031
 
 CMD /usr/local/bin/uwsgi /opencv/opencv.ini
