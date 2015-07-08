@@ -48,11 +48,11 @@ RUN apt-get install -y python3-pip
 
 RUN pip3 install virtualenv
 
-COPY images /opencv/images/
+COPY images /root/opencv/images/
 
-COPY opencv /opencv/opencv/
+COPY opencv /root/opencv/opencv/
 
-COPY feature-match.py manage.py opencv.ini /opencv/
+COPY feature-match.py manage.py opencv.ini /root/opencv/
 
 WORKDIR /root/opencv
 
