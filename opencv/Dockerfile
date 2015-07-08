@@ -44,7 +44,7 @@ WORKDIR /
 
 RUN rm -rf /opencv-build
 
-RUN apt-get install -y python3-pip
+RUN apt-get install -y python3-pip git
 
 RUN pip3 install virtualenv
 
@@ -54,7 +54,7 @@ COPY opencv /opencv/opencv/
 
 COPY feature-match.py manage.py opencv.ini /opencv/
 
-WORKDIR /opencv
+WORKDIR /root/opencv
 
 RUN virtualenv env
 
