@@ -3,7 +3,7 @@ import cv2
 
 MIN_MATCH_COUNT = 10
 
-img1 = cv2.imread('cartridge.jpg', 0)  # queryImage
+img1 = cv2.imread('test.jpg', 0)  # queryImage
 img2 = cv2.imread('cartridges.jpg', 0)  # trainImage
 
 print img1
