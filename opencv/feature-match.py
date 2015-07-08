@@ -1,4 +1,3 @@
-import numpy as np
 import cv2
 #from matplotlib import pyplot as plt
 
@@ -14,6 +13,7 @@ sift = cv2.Feature2D_create("SIFT")
 kp1, des1 = sift.detectAndCompute(img1,None)
 kp2, des2 = sift.detectAndCompute(img2,None)
 
+"""
 FLANN_INDEX_KDTREE = 0
 index_params = dict(algorithm = FLANN_INDEX_KDTREE, trees = 5)
 search_params = dict(checks = 50)
@@ -52,6 +52,7 @@ draw_params = dict(matchColor = (0,255,0), # draw matches in green color
 
 img3 = cv2.drawMatches(img1,kp1,img2,kp2,good,None,**draw_params)
 
-# cv2.imwrite("result.jpg", img3)
+cv2.imwrite("result.jpg", img3)
 
 #plt.imshow(img3, 'gray'),plt.show()
+"""
