@@ -8,7 +8,7 @@ img1 = cv2.imread('./images/cartridge.jpg', 0)  # queryImage
 img2 = cv2.imread('./images/cartridges.jpg', 0)  # trainImage
 
 # Initiate SIFT detector
-sift = cv2.FeatureDetector_create("SIFT")
+sift = cv2.Feature2D_create("SIFT")
 
 # find the keypoints and descriptors with SIFT
 kp1, des1 = sift.detectAndCompute(img1,None)
