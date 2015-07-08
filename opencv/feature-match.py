@@ -10,10 +10,10 @@ img2 = cv2.imread('./images/cartridges.jpg', 0)  # trainImage
 sift = cv2.Feature2D_create("SIFT")
 
 # find the keypoints and descriptors with SIFT
+"""
 kp1, des1 = sift.detectAndCompute(img1,None)
 kp2, des2 = sift.detectAndCompute(img2,None)
 
-"""
 FLANN_INDEX_KDTREE = 0
 index_params = dict(algorithm = FLANN_INDEX_KDTREE, trees = 5)
 search_params = dict(checks = 50)
