@@ -3,21 +3,17 @@ import cv2
 
 MIN_MATCH_COUNT = 10
 
-img1 = cv2.imread('test.jpg', 0)  # queryImage
-img2 = cv2.imread('cartridges.jpg', 0)  # trainImage
-
-print img1
-print img2
+img1 = cv2.imread('./images/cartridge.jpg', 0)  # queryImage
+img2 = cv2.imread('./images/cartridges.jpg', 0)  # trainImage
 
 # Initiate SIFT detector
-sift = cv2.Feature2D_create("SIFT")
+sift = cv2.xfeatures2d.SIFT_create()
 
 # find the keypoints and descriptors with SIFT
 
 kp1, des1 = sift.detectAndCompute(img1,None)
 kp2, des2 = sift.detectAndCompute(img2,None)
 
-"""
 FLANN_INDEX_KDTREE = 0
 index_params = dict(algorithm = FLANN_INDEX_KDTREE, trees = 5)
 search_params = dict(checks = 50)
@@ -59,4 +55,3 @@ img3 = cv2.drawMatches(img1,kp1,img2,kp2,good,None,**draw_params)
 cv2.imwrite("result.jpg", img3)
 
 #plt.imshow(img3, 'gray'),plt.show()
-"""
