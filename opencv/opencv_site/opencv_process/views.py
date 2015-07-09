@@ -16,6 +16,3 @@ def process(request):
         form = ImageForm()
 
     return render(request, 'opencv_process/process.html', {'form': form})
-
-def result(request):
-    return render(request, 'opencv_process/result.html')
