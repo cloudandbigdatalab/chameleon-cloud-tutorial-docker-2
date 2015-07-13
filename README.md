@@ -1,4 +1,4 @@
-# Chameleon Cloud Tutorial - Docker 2
+# Chameleon Tutorial - Docker Machine & Compose
 
 :warning: :warning: :warning:  
 **Tutorial Under Development**
