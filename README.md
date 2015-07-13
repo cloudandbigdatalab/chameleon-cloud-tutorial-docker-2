@@ -2,21 +2,15 @@
 
 :warning: **Tutorial Under Development**
 
-This tutorial will cover using Docker Machine and Compose.
+This tutorial will cover using Docker Machine and Compose. In the first tutorial we setup containers on 2 different hosts and linked them together to run a simple webpage. In this tutorial we will be setting up a different webpage using the Docker tools Machine and Compose to simplify organizing our containers together.
 
-Machine:
-I think I want to have them spin up multiple Chameleon servers then show them how to use Docker on them via Machine rather than SSH'ing to each Chameleon host. So basically just simplifying your workflow if all your using is Docker.
+Machine allows us to spin up cloud hosts for our containers without having to interact with the host machines directly. It's like using Docker on your local machine but you're actually commanding remote hosts.
 
-Compose:
-I want to take what I did in the first tutorial and wrap that up with Compose. That seems like a good idea. In the first part I had all the separate Docker files and then you strung it together with commands. So now I can show how to streamline what we already did.
-
-I'm not sure how or if I want to relate these two more together. I think I could get them setup with Machine then have the Compose script interface with that. I think that's possible but not sure.
-
-**End of Notes**
+Compose simplifies the process of arranging and linking containers together. In this tutorial we have 2 containers, one running Nginx and one running uWSGI (with Django and an OpenCV script). Compose lets us specify the connections and runtime configurations of both containers in a single file, rather than having several lengthy commands to execute in the right sequence.
 
 ## Machine
 
-:warning: **Need to figure out OpenStack API information for Chameleon then proceed. Using Machine is on hold until I hear back from the Chameleon admin.**
+:warning: **Docker Machine does not currently support passing in reservation ids during host creation and therefore does not work with Chameleon. So for this tutorial we're going to use the Rackspace cloud. Support for Chameleon will likely happen in the future. See this [issue](https://github.com/docker/machine/issues/1461) on their GitHub.** :warning:
 
 In the first tutorial we spun up Chameleon servers and accessed them directly via SSH. In this tutorial we're going to control them via Docker Machine. This is particularly useful if you're only working with Docker containers.
 
