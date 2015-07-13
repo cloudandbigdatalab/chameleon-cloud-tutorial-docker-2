@@ -1,4 +1,4 @@
-# Chameleon Tutorial - Docker Machine & Compose
+# Chameleon Cloud Tutorial - Docker Machine & Compose
 
 :warning: :warning: :warning:  
 **Tutorial Under Development**
@@ -9,10 +9,22 @@ Machine allows us to spin up cloud hosts for our containers without having to in
 
 Compose simplifies the process of arranging and linking containers together. In this tutorial we have 2 containers, one running Nginx and one running uWSGI (with Django and an OpenCV script). Compose lets us specify the connections and runtime configurations of both containers in a single file, rather than having several lengthy commands to execute in the right sequence.
 
-## Machine
+## Prerequisites
+
+It's expected that you have gone through the [first Docker tutorial]() or are already familiar with its content. No more prior knowledge is required past the first tutorial. **Because Machine is currently incompatible with Chameleon you will need access to a Rackspace project or another cloud provider supported by Machine. See note below.** You can use Compose without Machine however.
+
+## Steps Outline
+
+\# | Description | Time (mins)
+---|-------------|------------
+1 | Setup hosts with Docker Machine | 20
+2 | Build and launch containers with Docker Compose | 5 - 45
+3 | Test website | 5
+
+## 1. Machine
 
 :warning: :warning: :warning:  
-**Docker Machine does not currently support passing in reservation ids during host creation and therefore does not work with Chameleon. So for this tutorial we're going to use the Rackspace cloud. Support for Chameleon will likely happen in the future. See this [issue](https://github.com/docker/machine/issues/1461) on their GitHub.**
+**Docker Machine does not currently support passing in reservation ids during host creation and therefore does not work with Chameleon.** So for this tutorial we're going to use the Rackspace cloud. You can also use several other [supported providers](https://docs.docker.com/machine/#drivers). Support for Chameleon will likely happen in the future. See this [issue](https://github.com/docker/machine/issues/1461) on their GitHub.
 
 ### Installing Docker Machine on Your Local System
 
@@ -29,7 +41,7 @@ exit
 
 **Rest of Machine tutorial will follow once I get resources.**
 
-## Compose
+## 2. Compose
 
 ### Containers in Composition
 
