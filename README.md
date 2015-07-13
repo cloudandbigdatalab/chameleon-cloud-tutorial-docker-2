@@ -10,7 +10,7 @@ Compose simplifies the process of arranging and linking containers together. In 
 
 ## Machine
 
-:warning: :warning: :warning:
+:warning: :warning: :warning:  
 **Docker Machine does not currently support passing in reservation ids during host creation and therefore does not work with Chameleon. So for this tutorial we're going to use the Rackspace cloud. Support for Chameleon will likely happen in the future. See this [issue](https://github.com/docker/machine/issues/1461) on their GitHub.**
 
 In the first tutorial we spun up Chameleon servers and accessed them directly via SSH. In this tutorial we're going to control them via Docker Machine. This is particularly useful if you're only working with Docker containers.
