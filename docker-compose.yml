@@ -5,7 +5,7 @@ server:
   links:
     - page:page
   volumes:
-    - server/test-site.conf:/etc/nginx/conf.d/test-site.conf
+    - .server/test-site.conf:/etc/nginx/conf.d/test-site.conf
 
 page:
   build: ./page
