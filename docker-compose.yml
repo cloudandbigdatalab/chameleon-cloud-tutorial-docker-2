@@ -4,15 +4,17 @@ server:
     - "80"
   links:
     - page:page
+  volumes:
+    - ~/docker-2/test-site:/etc/nginx/sites-enabled/test-site
 
 page:
-  build: ./page/
+  build: ./page
   expose:
     - "3031"
   links:
     - db:db
 
 db:
-  build: ./db/
+  build: ./db
   expose:
     - "5432"
