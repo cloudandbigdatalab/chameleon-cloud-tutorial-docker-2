@@ -11,8 +11,8 @@ page:
   build: ./page
   expose:
     - "3031"
-  links:
-    - db:db
+  #links:
+  #  - db:db
 
 #db:
 #  build: ./db
