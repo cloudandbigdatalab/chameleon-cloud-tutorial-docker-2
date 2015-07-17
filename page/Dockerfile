@@ -4,6 +4,10 @@ FROM django
 
 RUN pip install uwsgi
 
-WORKDIR test-site
+WORKDIR /container_files/
 
-CMD uwsgi --ini test-site.ini
+COPY test_site/
+
+COPY uwsgi.ini
+
+CMD uwsgi uwsgi.ini
