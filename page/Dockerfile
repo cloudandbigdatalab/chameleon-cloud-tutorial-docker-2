@@ -6,8 +6,8 @@ RUN pip install uwsgi
 
 WORKDIR /container/
 
-COPY test_site/ .
+COPY test_site/ ./
 
-COPY uwsgi.ini .
+COPY uwsgi.ini ./
 
 CMD uwsgi uwsgi.ini
