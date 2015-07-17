@@ -25,7 +25,7 @@ TBD
 
 ## Setup
 
-Launch a Chameleon baremetal instance running CentOS 7 then execute the following installation commands. If you're using a different OS here are the installation instructions for [Docker](https://docs.docker.com/installation/) and [Machine](https://docs.docker.com/machine/#installation).
+Launch a Chameleon baremetal instance running CentOS 7 then execute the following installation commands. If you're using a different OS here are the installation instructions for [Docker](https://docs.docker.com/installation/), [Machine](https://docs.docker.com/machine/#installation), and [Compose](https://docs.docker.com/compose/install/).
 
 ```bash
 sudo yum update -y
@@ -33,6 +33,8 @@ sudo yum install -y docker
 sudo -i
 curl -L https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_linux-amd64 > /usr/local/bin/docker-machine
 chmod +x /usr/local/bin/docker-machine
+curl -L https://github.com/docker/compose/releases/download/1.3.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
 exit
 ```
 
@@ -41,8 +43,6 @@ exit
 **We're creating local VM's with Machine rather than remote physical or virtual machines.** We're doing this because Machine doesn't currently support passing in reservation ids during host creation and therefore does not work with Chameleon. If Chameleon was compatible we could create and control remote Docker hosts from a Chameleon instance or from your personal computer. Support for Chameleon will likely happen in the future. See this [issue](https://github.com/docker/machine/issues/1461) on their GitHub.
 
 ## Compose
-
-/etc/nginx/conf.d/
 
 ### Containers in Composition
 
