@@ -4,7 +4,7 @@ FROM django
 
 RUN pip install uwsgi
 
-WORKDIR /container_files/
+WORKDIR /container/
 
 COPY test_site/
 
