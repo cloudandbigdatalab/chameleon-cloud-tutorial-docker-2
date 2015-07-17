@@ -1,6 +1,6 @@
-MAINTAINER shawnmaten@gmail.com
-
 FROM django
+
+MAINTAINER shawnmaten@gmail.com
 
 RUN pip install uwsgi
 
