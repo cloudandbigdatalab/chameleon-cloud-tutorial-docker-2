@@ -30,24 +30,15 @@ Launch a Chameleon baremetal instance running CentOS 7 then execute the followin
 ```bash
 sudo yum update -y
 sudo yum install -y docker
-
+sudo -i
+curl -L https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_linux-amd64 > /usr/local/bin/docker-machine
+chmod +x /usr/local/bin/docker-machine
+exit
 ```
 
 ## Machine
 
-:warning: :warning: :warning:  
-**Docker Machine does not currently support passing in reservation ids during host creation and therefore does not work with Chameleon.** So for this tutorial we're going to use the Rackspace cloud. You can also use several other [supported providers](https://docs.docker.com/machine/#drivers). Support for Chameleon will likely happen in the future. See this [issue](https://github.com/docker/machine/issues/1461) on their GitHub.
-
-### Installing Docker Machine on Your Local System
-
-Docker Machine is available for Linux, OS X, and Windows. See the Docker installation [instructions] (https://docs.docker.com/machine/install-machine/) for your OS. I'm using a Mac in the example. **I needed to run `sudo -i` before the commands on the website. Make sure to exit.**
-
-```sh
-sudo -i
-curl -L https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_darwin-amd64 > /usr/local/bin/docker-machine
-chmod +x /usr/local/bin/docker-machine
-exit
-```
+**We're creating local VM's with Machine rather than remote physical or virtual machines.** We're doing this because Machine doesn't currently support passing in reservation ids during host creation and therefore does not work with Chameleon. If Chameleon was compatible we could create and control remote Docker hosts from a Chameleon instance or from your personal computer. Support for Chameleon will likely happen in the future. See this [issue](https://github.com/docker/machine/issues/1461) on their GitHub.
 
 ## Compose
 
