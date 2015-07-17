@@ -25,6 +25,14 @@ TBD
 
 ## Setup
 
+Launch a Chameleon baremetal instance running CentOS 7 then execute the following installation commands.
+
+```bash
+dnf update
+dnf install -y docker
+
+```
+
 ## Machine
 
 :warning: :warning: :warning:  
