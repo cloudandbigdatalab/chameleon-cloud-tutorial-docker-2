@@ -1,27 +1,31 @@
-# Chameleon Cloud Tutorial - Docker Machine & Compose
+# Chameleon Cloud Tutorial - Docker Machine, Compose, and Swarm
 
 :warning: :warning: :warning:  
 **Tutorial Under Development**
 
-This tutorial will cover using Docker Machine and Compose. In the first tutorial we setup containers on 2 different hosts and linked them together to run a simple webpage. In this tutorial we will be setting up a different webpage using the Docker tools Machine and Compose to simplify organizing our containers together.
+This tutorial will cover using Docker Machine, Compose and Swarm. In the first tutorial we setup containers on 2 different hosts and linked them together to run a simple webpage. In this tutorial we will be setting up a [service explanation].
 
-Machine allows us to spin up cloud hosts for our containers without having to interact with the host machines directly. It's like using Docker on your local machine but you're actually commanding remote hosts.
+Machine allows us to create Docker hosts and control them without interacting with the host machines directly. This way you don't have to SSH to machines running the Docker daemon to run containers.
 
-Compose simplifies the process of arranging and linking containers together. In this tutorial we have 2 containers, one running Nginx and one running uWSGI (with Django and an OpenCV script). Compose lets us specify the connections and runtime configurations of both containers in a single file, rather than having several lengthy commands to execute in the right sequence.
+Compose simplifies the process of arranging and linking containers together. Compose lets us specify the links and runtime configurations of containers in a single config file, rather than having several lengthy commands to execute in the right sequence.
+
+Swarm is used to group multiple Docker hosts together so that containers can run and scale across machines.
+
+Machine, Compose, and Swarm can be used together to simply and powerfully orchestrate a service. This is what we'll doing in this tutorial.
 
 ## Prerequisites
 
-It's expected that you have gone through the [first Docker tutorial]() or are already familiar with its content. No more prior knowledge is required past the first tutorial. **Because Machine is currently incompatible with Chameleon you will need access to a Rackspace project or another cloud provider supported by Machine. See note below.** You can use Compose without Machine however.
+It's expected that you have gone through the [first Docker tutorial]() or are already familiar with its content. No more prior knowledge is required past the first tutorial. This tutorial uses a Chameleon baremetal machine running CentOS 7.
 
 ## Steps Outline
 
 \# | Description | Time (mins)
 ---|-------------|------------
-1 | Setup hosts with Docker Machine | 20
-2 | Build and launch containers with Docker Compose | 5 - 45
-3 | Test website | 5
+TBD
 
-## 1. Machine
+## Setup
+
+## Machine
 
 :warning: :warning: :warning:  
 **Docker Machine does not currently support passing in reservation ids during host creation and therefore does not work with Chameleon.** So for this tutorial we're going to use the Rackspace cloud. You can also use several other [supported providers](https://docs.docker.com/machine/#drivers). Support for Chameleon will likely happen in the future. See this [issue](https://github.com/docker/machine/issues/1461) on their GitHub.
@@ -37,11 +41,7 @@ chmod +x /usr/local/bin/docker-machine
 exit
 ```
 
-### Setting up Machine with Rackspace
-
-**Rest of Machine tutorial will follow once I get resources.**
-
-## 2. Compose
+## Compose
 
 ### Containers in Composition
 
