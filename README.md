@@ -42,6 +42,8 @@ exit
 
 ## Compose
 
+/etc/nginx/conf.d/
+
 ### Containers in Composition
 
 Level | Name | Apps Running
