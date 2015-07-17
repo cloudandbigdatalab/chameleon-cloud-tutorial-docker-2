@@ -1,9 +1,0 @@
-server {
-    listen 80;
-    server_name ~[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+;
-
-    location / {
-        include uwsgi_params;
-        uwsgi_pass page:3031;
-    }
-}
