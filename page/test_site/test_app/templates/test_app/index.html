@@ -5,12 +5,12 @@
 <ul class="list-group">
   {% for post in posts  %}
   <li class="list-group-item">{{ post.post_text }}</li>
-{% endfor %}
+  {% endfor %}
 </ul>
-<form class="form-horizontal" action="/" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Post" />
+<form action="/" method="post">
+  {% csrf_token %}
+  {{ form }}
+  <input type="submit" value="Post" />
 </form>
 </div>
 {% endblock %}
