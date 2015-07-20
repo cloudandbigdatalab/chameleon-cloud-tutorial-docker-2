@@ -6,6 +6,8 @@ from .forms import PostForm
 from .models import Post
 
 def index(request):
+    posts = Post.objects.all()
+
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
@@ -14,7 +16,6 @@ def index(request):
 
             return HttpResponseRedirect('/')
     else:
-        posts = Post.objects.all()
         form = PostForm()
-
+        
     return render(request, 'test_app/index.html', {'form': form, 'posts': posts})
