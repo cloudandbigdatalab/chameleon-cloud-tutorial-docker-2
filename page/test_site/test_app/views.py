@@ -12,4 +12,4 @@ def index(request):
     else:
         form = PostForm()
 
-    return render(request, 'index.html', {'form': form})
+    return render(request, 'test_app/index.html', {'form': form})
