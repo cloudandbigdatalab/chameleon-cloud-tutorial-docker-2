@@ -10,4 +10,6 @@ COPY test_site/ ./test_site/
 
 COPY uwsgi.ini ./
 
-CMD uwsgi uwsgi.ini
+CMD python ./test_site/manage.py makemigrations &&\
+python ./test_site/manage.py migrate &&\
+uwsgi uwsgi.ini

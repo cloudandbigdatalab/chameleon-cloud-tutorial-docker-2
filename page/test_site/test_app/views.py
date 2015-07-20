@@ -10,9 +10,7 @@ from .models import Post
 def index(request):
     context = {}
 
-    posts = Post.objects.all()
-    #if posts.count != 0:
-        #context['posts'] = posts
+    context['posts'] = Post.objects.all()
     context['title'] = os.environ['HOSTNAME']
 
     if request.method == 'POST':
