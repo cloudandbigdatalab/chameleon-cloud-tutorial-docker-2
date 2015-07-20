@@ -9,7 +9,7 @@ from .models import Post
 
 def index(request):
     posts = Post.objects.all()
-    title = "Container Id: " + os.environ['HOSTNAME']
+    title = os.environ['HOSTNAME']
 
     if request.method == 'POST':
         form = PostForm(request.POST)
