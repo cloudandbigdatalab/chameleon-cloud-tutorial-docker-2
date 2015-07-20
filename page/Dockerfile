@@ -2,7 +2,7 @@ FROM django
 
 MAINTAINER shawnmaten@gmail.com
 
-RUN pip install uwsgi
+RUN pip install uwsgi psycopg2
 
 WORKDIR /container/
 
