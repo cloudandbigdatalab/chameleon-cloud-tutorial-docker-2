@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from .forms import PostForm
+
 def index(request):
     if request.method == 'POST':
         form = NameForm(request.POST)
