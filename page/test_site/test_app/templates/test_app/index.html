@@ -7,9 +7,9 @@
   <li class="list-group-item">{{ post.post_text }}</li>
   {% endfor %}
 </ul>
+</div>
 
-<div class="panel panel-default">
-  <div class="panel-body">
+<div class="container-fluid">
 
 <form class="form-inline" action="/" method="post">
   {% csrf_token %}
@@ -21,7 +21,6 @@
   <input class="btn btn-primary" type="submit" value="Post" />
 </form>
 </div>
-</div>
 
-</div>
+
 {% endblock %}
