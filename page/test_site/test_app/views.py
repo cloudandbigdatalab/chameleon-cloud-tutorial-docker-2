@@ -11,8 +11,8 @@ def index(request):
     context = {}
 
     posts = Post.objects.all()
-    if posts.count != 0:
-        context['posts'] = posts
+    #if posts.count != 0:
+        #context['posts'] = posts
     context['title'] = os.environ['HOSTNAME']
 
     if request.method == 'POST':
