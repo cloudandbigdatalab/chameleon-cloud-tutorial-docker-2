@@ -16,7 +16,7 @@ def index(request):
     else:
         posts = Post.objects.all()
         for post in posts:
-            print (post)
+            print (post.post_text)
         print (posts)
         form = PostForm()
 
