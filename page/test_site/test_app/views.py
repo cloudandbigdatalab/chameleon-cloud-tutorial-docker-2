@@ -19,5 +19,5 @@ def index(request):
             return HttpResponseRedirect('/')
     else:
         form = PostForm()
-        
-    return render(request, 'test_app/index.html', {'form': form, 'posts': posts, 'title': os.environ['HOSTNAME']})
+
+    return render(request, 'test_app/index.html', {'form': form, 'posts': posts, 'title': str(os.environ['HOSTNAME']}))
