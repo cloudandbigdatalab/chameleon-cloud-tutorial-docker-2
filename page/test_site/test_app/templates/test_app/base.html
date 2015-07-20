@@ -19,7 +19,7 @@
 
     {% block head %}{% endblock %}
 
-    <title>{% if title != null %}{{ title }}{% else %}{{ 'Test Site' }}{% endif %}</title>
+    <title>{% if title %}{{ title }}{% else %}{{ 'Test Site' }}{% endif %}</title>
 </head>
 
 <body>
