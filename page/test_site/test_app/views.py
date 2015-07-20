@@ -9,6 +9,7 @@ from .models import Post
 
 def index(request):
     posts = Post.objects.all()
+    title = "Container Id: " + os.environ['HOSTNAME']
 
     if request.method == 'POST':
         form = PostForm(request.POST)
@@ -20,4 +21,4 @@ def index(request):
     else:
         form = PostForm()
 
-    return render(request, 'test_app/index.html', {'form': form, 'posts': posts, 'title': os.environ['HOSTNAME']})
+    return render(request, 'test_app/index.html', {'form': form, 'posts': posts, 'title': title})
