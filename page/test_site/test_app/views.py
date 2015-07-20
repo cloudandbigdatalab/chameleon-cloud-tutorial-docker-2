@@ -20,6 +20,4 @@ def index(request):
     else:
         form = PostForm()
 
-    print (os.environ['HOSTNAME'])
-
     return render(request, 'test_app/index.html', {'form': form, 'posts': posts, 'title': os.environ['HOSTNAME']})
