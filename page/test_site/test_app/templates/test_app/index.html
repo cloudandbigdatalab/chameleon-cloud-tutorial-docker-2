@@ -1,14 +1,16 @@
 {% extends 'test_app/base.html' %}
 
 {% block content %}
-<div class="container"
+<div class="container-fluid">
+
+<div class="panel panel-default">
+  <div class="panel-heading">Previous Posts</div>
 <ul class="list-group">
   {% for post in posts  %}
   <li class="list-group-item">{{ post.post_text }}</li>
   {% endfor %}
 </ul>
-
-<br>
+</div>
 
 <form class="form-inline" action="/" method="post">
   {% csrf_token %}
