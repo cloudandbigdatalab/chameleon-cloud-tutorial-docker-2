@@ -9,6 +9,7 @@ def index(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
+            print (form.cleaned_data)
             p = Post(post_text=form.cleaned_data['id_post_text'], pub_date=timezone.now())
             p.save()
 
