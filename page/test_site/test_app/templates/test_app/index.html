@@ -3,7 +3,7 @@
 {% block content %}
 <ul class="list-group">
   {% for post in posts  %}
-  <li class="list-group-item">post.post_text</li>
+  <li class="list-group-item">{{ post.post_text }}</li>
 {% endfor %}
 </ul>
 <form action="/" method="post">

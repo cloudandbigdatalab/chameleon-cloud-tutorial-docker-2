@@ -15,9 +15,6 @@ def index(request):
             return HttpResponseRedirect('/')
     else:
         posts = Post.objects.all()
-        for post in posts:
-            print (post.post_text)
-        print (posts)
         form = PostForm()
 
     return render(request, 'test_app/index.html', {'form': form, 'posts': posts})
