@@ -4,7 +4,9 @@
 <div class="container-fluid">
 
 <div class="panel panel-default">
-  <div class="panel-heading">Previous Posts</div>
+  <div class="panel-heading">
+    <h3 class="panel-title">Previous Posts</h3>
+  </div>
 <ul class="list-group">
   {% for post in posts  %}
   <li class="list-group-item">{{ post.post_text }}</li>
