@@ -4,7 +4,7 @@ from .forms import PostForm
 
 def index(request):
     if request.method == 'POST':
-        form = NameForm(request.POST)
+        form = PostForm(request.POST)
         if form.is_valid():
             print (form.cleaned_data['post_text'])
 
