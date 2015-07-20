@@ -9,7 +9,10 @@
 </ul>
 <form class="form-inline" action="/" method="post">
   {% csrf_token %}
-  {{ form }}
+  {% for field in form %}
+  <div class="form-group">
+  {{ field }}
+</div>
   <input class="btn btn-primary" type="submit" value="Post" />
 </form>
 </div>
