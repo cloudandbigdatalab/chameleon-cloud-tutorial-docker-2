@@ -9,8 +9,6 @@ from .models import Post
 
 def index(request):
     posts = Post.objects.all()
-    if posts.exists() == False:
-        posts = None
     title = os.environ['HOSTNAME']
 
     if request.method == 'POST':
