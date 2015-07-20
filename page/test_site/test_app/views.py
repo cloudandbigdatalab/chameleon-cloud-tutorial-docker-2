@@ -8,8 +8,12 @@ from .forms import PostForm
 from .models import Post
 
 def index(request):
+    context = {}
+
     posts = Post.objects.all()
-    title = os.environ['HOSTNAME']
+    if posts.count != 0:
+        context['posts'] = posts
+    context['title'] = os.environ['HOSTNAME']
 
     if request.method == 'POST':
         form = PostForm(request.POST)
@@ -19,6 +23,6 @@ def index(request):
 
             return HttpResponseRedirect('/')
     else:
-        form = PostForm()
+        context['form'] = PostForm()
 
-    return render(request, 'test_app/index.html', {'form': form, 'posts': posts, 'title': title})
+    return render(request, 'test_app/index.html', context)
