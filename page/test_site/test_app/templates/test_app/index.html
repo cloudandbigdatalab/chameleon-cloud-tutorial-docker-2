@@ -3,15 +3,21 @@
 {% block content %}
 <div class="container-fluid">
 
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">Previous Posts</h3>
-  </div>
-<ul class="list-group">
-  {% for post in posts  %}
-  <li class="list-group-item">{{ post.post_text }}</li>
-  {% endfor %}
-</ul>
+<div class="row">
+
+  <div class="col-xs-12 col-sm-10 col-md-8 col-lg-6 col-xl-4">
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Previous Posts</h3>
+      </div>
+    <ul class="list-group">
+      {% for post in posts  %}
+      <li class="list-group-item">{{ post.post_text }}</li>
+      {% endfor %}
+    </ul>
+    </div>
+
 </div>
 
 <form class="form-inline" action="/" method="post">
