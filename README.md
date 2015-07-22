@@ -35,9 +35,7 @@ We're using Rackspace because Machine doesn't currently support passing in reser
 
 ### Installation
 
-For this demo we used a personal MacBook running OS X but installation instructions are available for basically any OS. Here are the instructions for [Machine](https://docs.docker.com/machine/#installation) and [Compose](https://docs.docker.com/compose/install/).  
-
-**If you're getting "Permission Denied" using curl, run `sudo -i` to become root, run the commands, then `exit`.**
+For this demo we used a personal MacBook running OS X but installation instructions are available for basically any OS. Here are the instructions for [Machine](https://docs.docker.com/machine/#installation) and [Compose](https://docs.docker.com/compose/install/). **If you're getting "Permission Denied" using curl, run `sudo -i` to become root, run the commands, then `exit`.**
 
 ### Swarm Token
 
