@@ -3,7 +3,7 @@
 :warning: :warning: :warning:  
 **Tutorial Under Development**
 
-**Because of incompatibilities this tutorial doesn't currently use Chameleon resources. Instead you can use another cloud provider or local VM's. See [this](## Setup Swarm Cluster) section for details.**
+**Because of incompatibilities this tutorial doesn't currently use Chameleon resources. Instead you can use another cloud provider or local VM's. See [this](##Setup_Swarm_Cluster) section for details.**
 
 This tutorial will cover using Docker Machine, Compose and Swarm. In the first tutorial we setup containers on 2 different hosts and linked them together to run a simple webpage. In this tutorial we will set up a similar page that lets you post messages and lists those previously posted. It uses 3 containers and we'll arrange them with Compose.
 
