@@ -146,14 +146,12 @@ db:
   image: postgres
 ```
 
-This layouts out the 3 container composition. The Dockerfiles and code for the containers are in their respective folders. Note for the Postgres container we're using the image unmodified off Docker Hub.
+This lays out the 3 container composition.
 
-### Containers in Composition
+Container Name | Apps Running | Description
+---------------|--------------|------------
+server | Nginx | handles http requests
+page | uWSGI and Django | uWSGI connects nginx to Django and Django generates the page
+db | Postgres | database for page
 
-Level | Name | Apps Running
-------|------|------------
-1 | http_server | Nginx
-2 | page_generator | uWSGI, Django
-2 | image_processor | uWSGI, Django, OpenCV
-
-The http_server container will act as the front for both the page_generator and image_processor containers. I think this way I can also set up the image_processor first and test it without the webpage.
+The Dockerfiles and code for the containers are in their respective folders. Note for the Postgres container we're using the unmodified image off Docker Hub so their isn't a folder for it.
