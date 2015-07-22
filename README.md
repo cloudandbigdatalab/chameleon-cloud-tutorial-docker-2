@@ -35,7 +35,7 @@ For this demo we used a personal MacBook running OS X to launch and control host
 
 Create a machine. We're naming it *docker-main*.
 
-```bash
+```shell
 docker-machine create \
   -d rackspace \
   --rackspace-username $USERNAME \
@@ -46,13 +46,13 @@ docker-machine create \
 
 Load the machine env variables.
 
-```bash
+```shell
 eval "$(docker-machine env docker-main)"
 ```
 
 Generate a token. Save the token for later. You can set it as env variable if you'd like.
 
-```bash
+```shell
 docker run swarm create
 ```
 
@@ -60,7 +60,7 @@ docker run swarm create
 
 Create the Swarm master.
 
-```bash
+```shell
 docker-machine create \
   -d rackspace \
   --rackspace-username $USERNAME \
@@ -76,7 +76,7 @@ docker-machine create \
 
 We're using a bash loop to create 2 swarm nodes. You can create as many as you want. (Creating 2 on Rackspace took about 3 minutes.)
 
-```bash
+```shell
 for((i=0;i<2;i++)); do \
   docker-machine create \
     -d rackspace \
@@ -91,13 +91,13 @@ done
 
 ### Connect to Swarm Master
 
-```bash
+```shell
 eval "$(docker-machine env --swarm swarm-master)"
 ```
 
 You can see info about your swarm with `docker info`. The output should be similar to:
 
-```bash
+```shell
 Containers: 4
 Images: 3
 Role: primary
@@ -124,6 +124,7 @@ Total Memory: 3.041 GiB
 ```
 
 ## Compose
+
 
 ### Containers in Composition
 
