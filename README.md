@@ -89,18 +89,39 @@ for((i=0;i<2;i++)); do \
 done
 ```
 
-Now if we run `docker-machine ls` we should see something like:
+### Connect to Swarm Master
 
 ```bash
-NAME           ACTIVE   DRIVER       STATE     URL                          SWARM
-dev                     virtualbox   Stopped
-docker-main    *        rackspace    Running   tcp://23.253.119.45:2376
-swarm-master            rackspace    Running   tcp://23.253.107.53:2376     swarm-master (master)
-swarm-node-0            rackspace    Running   tcp://23.253.90.169:2376     swarm-master
-swarm-node-1            rackspace    Running   tcp://104.239.132.168:2376   swarm-master
+eval "$(docker-machine env --swarm swarm-master)"
 ```
 
-You can ignore the *dev* machine.
+You can see info about your swarm with `docker info`. The output should be similar to:
+
+```bash
+Containers: 4
+Images: 3
+Role: primary
+Strategy: spread
+Filters: affinity, health, constraint, port, dependency
+Nodes: 3
+ swarm-master: 23.253.107.53:2376
+  └ Containers: 2
+  └ Reserved CPUs: 0 / 1
+  └ Reserved Memory: 0 B / 1.014 GiB
+  └ Labels: executiondriver=native-0.2, kernelversion=3.13.0-37-generic, operatingsystem=Ubuntu 14.04.1 LTS, provider=rackspace, storagedriver=aufs
+ swarm-node-0: 23.253.90.169:2376
+  └ Containers: 1
+  └ Reserved CPUs: 0 / 1
+  └ Reserved Memory: 0 B / 1.014 GiB
+  └ Labels: executiondriver=native-0.2, kernelversion=3.13.0-37-generic, operatingsystem=Ubuntu 14.04.1 LTS, provider=rackspace, storagedriver=aufs
+ swarm-node-1: 104.239.132.168:2376
+  └ Containers: 1
+  └ Reserved CPUs: 0 / 1
+  └ Reserved Memory: 0 B / 1.014 GiB
+  └ Labels: executiondriver=native-0.2, kernelversion=3.13.0-37-generic, operatingsystem=Ubuntu 14.04.1 LTS, provider=rackspace, storagedriver=aufs
+CPUs: 3
+Total Memory: 3.041 GiB
+```
 
 ## Compose
 
