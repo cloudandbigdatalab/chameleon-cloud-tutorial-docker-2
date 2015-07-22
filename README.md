@@ -125,9 +125,7 @@ Total Memory: 3.041 GiB
 
 ## Compose
 
-Now we're going to launch our composition. Clone this [repo](https://github.com/cloudandbigdatalab/chameleon-cloud-tutorial-docker-2.git) and change into the created directory.
-
-You should see a file named `docker-compose.yml` that contains:
+Now we're going to launch our composition. Clone this [repo](https://github.com/cloudandbigdatalab/chameleon-cloud-tutorial-docker-2.git) and change into the created directory. You should see a file named `docker-compose.yml` that contains:
 
 ```yaml
 server:
