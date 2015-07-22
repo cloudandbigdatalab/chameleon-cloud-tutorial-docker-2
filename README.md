@@ -151,7 +151,7 @@ This lays out the 3 container composition.
 Container | Apps | Description
 ----------|------|------------
 server | Nginx | handles http requests
-page | uWSGI and Django | uWSGI connects Nginx to Django, Django generates the html pages
+page | uWSGI and Django | uWSGI connects Nginx to Django, Django generates the htlml
 db | Postgres | database for page
 
 The Dockerfiles and code for the containers are in their respective folders. Note for the Postgres container we're using the unmodified image off Docker Hub so their isn't a folder for it.
