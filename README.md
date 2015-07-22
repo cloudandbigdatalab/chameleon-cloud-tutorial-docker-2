@@ -25,7 +25,7 @@ TBD
 
 ## Installation
 
-For this demo we used a personal MacBook running OS X to launch and control hosts and containers. The installation and commands are very similar for other OS though, including CentOS on Chameleon. Here are the installation instructions for [Machine](https://docs.docker.com/machine/#installation) and [Compose](https://docs.docker.com/compose/install/). Follow the steps for your OS. **If you're getting "Permission Denied" using curl run `sudo -i` to become root, run the commands, then `exit`.**
+For this demo we used a personal MacBook running OS X to launch and control hosts and containers. The installation and commands are very similar for other OS though, including CentOS on Chameleon. Here are the installation instructions for [Machine](https://docs.docker.com/machine/#installation) and [Compose](https://docs.docker.com/compose/install/). Follow the steps for your OS. **If you're getting "Permission Denied" using curl, run `sudo -i` to become root, run the commands, then `exit`.**
 
 ## Setup Swarm Cluster
 
