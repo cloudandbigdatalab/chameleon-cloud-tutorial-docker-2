@@ -33,7 +33,7 @@ For this demo we used a personal MacBook running OS X to launch and control host
 
 ### Swarm Token
 
-Create a machine. We're naming it *docker-main*.
+Create a machine. We're naming it `docker-main`.
 
 ```shell
 docker-machine create \
@@ -129,7 +129,7 @@ Now we're going to launch our composition. Clone this [repo](https://github.com/
 
 You should see a file named `docker-compose.yml` that contains:
 
-```yml
+```yaml
 server:
   build: ./server
   ports:
