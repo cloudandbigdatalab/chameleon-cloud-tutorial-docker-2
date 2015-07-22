@@ -155,3 +155,13 @@ page | uWSGI and Django | uWSGI connects Nginx to Django, Django generates the h
 db | Postgres | database for page, Django connects to Postgres
 
 The Dockerfiles and code for the containers are in their respective folders. Note for the Postgres container we're using the unmodified image off Docker Hub so their isn't a folder for it.
+
+## Run the Composition
+
+```shell
+docker-compose up -d
+```
+
+If you modify a container's code or Dockerfile after launching run `docker-compose build` to rebuild then run `docker-compose up -d` again.
+
+## Scale the Composition
