@@ -23,71 +23,84 @@ It's expected that you have gone through the [first Docker tutorial](http://clou
 ---|-------------|------------
 TBD
 
-## Setup
+## Installation
 
-Launch a Chameleon baremetal instance running CentOS 7 then execute the following installation commands. If you're using a different OS here are the installation instructions for [Docker](https://docs.docker.com/installation/), [Machine](https://docs.docker.com/machine/#installation), and [Compose](https://docs.docker.com/compose/install/).
-
-```sh
-sudo -i
-
-yum update -y
-yum install -y docker wget
-
-curl -L https://github.com/docker/machine/releases/download/v0.3.0/docker-machine_linux-amd64 > /usr/local/bin/docker-machine
-chmod +x /usr/local/bin/docker-machine
-
-curl -L https://github.com/docker/compose/releases/download/1.3.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose
-
-# VirtualBox
-
-wget -O /etc/yum.repos.d/virtualbox.repo http://download.virtualbox.org/virtualbox/rpm/rhel/virtualbox.repo
-
-wget http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el7.rf.x86_64.rpm
-rpm -Uvh rpmforge-release-0.5.3-1.el7.rf.x86_64.rpm
-
-wget http://dag.wieers.com/rpm/packages/RPM-GPG-KEY.dag.txt
-rpm --import RPM-GPG-KEY.dag.txt
-
-yum install -y yum-plugin-priorities
-
-yum --enablerepo rpmforge install -y dkms
-
-yum groupinstall -y "Development Tools" --setopt=group_package_types=mandatory,default,optional
-yum install -y kernel-devel
-
-yum install -y VirtualBox-5.0
-
-# End of VirtualBox
-
-exit
-```
+For this demo we used a personal MacBook running OS X to launch and control hosts and containers. The installation and commands are very similar for other OS though, including CentOS on Chameleon. Here are the installation instructions for [Machine](https://docs.docker.com/machine/#installation) and [Compose](https://docs.docker.com/compose/install/). Follow the steps for your OS. **If you're getting "Permission Denied" using curl run `sudo -i` to become root, run the commands, then `exit`.**
 
 ## Setup Swarm Cluster
 
-**We're creating local VM's rather than remote physical or virtual machines.** We're doing this because Machine doesn't currently support passing in reservation ids during host creation and therefore does not work with Chameleon. If Chameleon was compatible we could create and control remote Docker hosts from a Chameleon instance or from your personal computer. Support for Chameleon will likely happen in the future. See this [issue](https://github.com/docker/machine/issues/1461) on their GitHub.
+**For this tutorial we're using the Rackspace cloud.** We're doing this because Machine doesn't currently support passing in reservation ids during host creation and therefore does not work with Chameleon. Support for Chameleon will likely happen in the future. See this [issue](https://github.com/docker/machine/issues/1461) on their GitHub.
 
 ### Swarm Token
 
-Run the following command to generate a Swarm token. Save it.
+Create a machine. We're naming it *docker-main*.
 
-```sh
-sudo docker run swarm create
-# d36cbc29b44f96c85ed7b47eb794a65f
+```bash
+docker-machine create \
+  -d rackspace \
+  --rackspace-username $USERNAME \
+  --rackspace-api-key $API_KEY \
+  --rackspace-region $REGION \
+  docker-main
+```
+
+Load the machine env variables.
+
+```bash
+eval "$(docker-machine env docker-main)"
+```
+
+Generate a token. Save the token for later. You can set it as env variable if you'd like.
+
+```bash
+docker run swarm create
 ```
 
 ### Swarm Master
 
 Create the Swarm master.
 
-```sh
-sudo docker-machine create \
-    -d virtualbox \
-    --swarm \
-    --swarm-master \
-    --swarm-discovery token://d36cbc29b44f96c85ed7b47eb794a65f \
-    swarm-master
+```bash
+docker-machine create \
+  -d rackspace \
+  --rackspace-username $USERNAME \
+  --rackspace-api-key $API_KEY \
+  --rackspace-region $REGION \
+  --swarm \
+  --swarm-master \
+  --swarm-discovery token://$TOKEN \
+  swarm-master
 ```
+
+### Swarm Nodes
+
+We're using a bash loop to create 2 swarm nodes. You can create as many as you want. (Creating 2 on Rackspace took about 3 minutes.)
+
+```bash
+for((i=0;i<2;i++)); do \
+  docker-machine create \
+    -d rackspace \
+    --rackspace-username $USERNAME \
+    --rackspace-api-key $API_KEY \
+    --rackspace-region $REGION \
+    --swarm \
+    --swarm-discovery token://$TOKEN \
+    swarm-node-$i; \
+done
+```
+
+Now if we run `docker-machine ls` we should see something like:
+
+```bash
+NAME           ACTIVE   DRIVER       STATE     URL                          SWARM
+dev                     virtualbox   Stopped
+docker-main    *        rackspace    Running   tcp://23.253.119.45:2376
+swarm-master            rackspace    Running   tcp://23.253.107.53:2376     swarm-master (master)
+swarm-node-0            rackspace    Running   tcp://23.253.90.169:2376     swarm-master
+swarm-node-1            rackspace    Running   tcp://104.239.132.168:2376   swarm-master
+```
+
+You can ignore the *dev* machine.
 
 ## Compose
 
