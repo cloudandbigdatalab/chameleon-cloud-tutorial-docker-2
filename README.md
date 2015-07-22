@@ -3,6 +3,8 @@
 :warning: :warning: :warning:  
 **Tutorial Under Development**
 
+**Because of incompatibilities this tutorial doesn't currently use Chameleon resources. Instead you can use another cloud provider or local VM's. See [this](## Setup Swarm Cluster) section for details.**
+
 This tutorial will cover using Docker Machine, Compose and Swarm. In the first tutorial we setup containers on 2 different hosts and linked them together to run a simple webpage. In this tutorial we will set up a similar page that lets you post messages and lists those previously posted. It uses 3 containers and we'll arrange them with Compose.
 
 Machine allows us to create Docker hosts and control them without interacting with the host machines directly. This way you don't have to SSH to machines running the Docker daemon to run containers.
@@ -15,7 +17,7 @@ Machine, Compose, and Swarm can be used together to simply and powerfully orches
 
 ## Prerequisites
 
-It's expected that you have gone through [Docker Tutorial 1](http://cloudandbigdatalab.github.io/docs/Chameleon%20Cloud%20Tutorial%20-%20Docker%20Fundamentals.pdf) or are already familiar with its content. No more prior knowledge is required past the first tutorial. This tutorial uses a Chameleon baremetal machine running CentOS 7.
+It's expected that you have gone through [Docker Tutorial 1](http://cloudandbigdatalab.github.io/docs/Chameleon%20Cloud%20Tutorial%20-%20Docker%20Fundamentals.pdf) or are already familiar with its content. No more prior knowledge is required past the first tutorial.
 
 ## Steps Outline
 
@@ -23,13 +25,19 @@ It's expected that you have gone through [Docker Tutorial 1](http://cloudandbigd
 ---|-------------|------------
 TBD
 
-## Installation
-
-For this demo we used a personal MacBook running OS X to launch and control hosts and containers. The installation and commands are very similar for other OS though, including CentOS on Chameleon. Here are the installation instructions for [Machine](https://docs.docker.com/machine/#installation) and [Compose](https://docs.docker.com/compose/install/). Follow the steps for your OS. **If you're getting "Permission Denied" using curl, run `sudo -i` to become root, run the commands, then `exit`.**
-
 ## Setup Swarm Cluster
 
-**For this tutorial we're using the Rackspace cloud.** We're doing this because Machine doesn't currently support passing in reservation ids during host creation and therefore does not work with Chameleon. Support for Chameleon will likely happen in the future. See this [issue](https://github.com/docker/machine/issues/1461) on their GitHub.
+**For this tutorial we're using a personal laptop and the Rackspace cloud.**
+
+We're using a personal laptop because it's sensible to control remote machines from a local machine rather than SSH'ing to a remote machine to control remote machines. However, you can do all your work from a Chameleon instance. Every step is the same past installation, except you'll need to add `sudo` to your commands on the default Chameleon CentOS image.
+
+We're using Rackspace because Machine doesn't currently support passing in reservation ids during host creation and therefore does not work with Chameleon. Support for Chameleon will likely happen in the future. See this [issue](https://github.com/docker/machine/issues/1461) on their GitHub.
+
+### Installation
+
+For this demo we used a personal MacBook running OS X but installation instructions are available for basically any OS. Here are the instructions for [Machine](https://docs.docker.com/machine/#installation) and [Compose](https://docs.docker.com/compose/install/).  
+
+**If you're getting "Permission Denied" using curl, run `sudo -i` to become root, run the commands, then `exit`.**
 
 ### Swarm Token
 
