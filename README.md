@@ -148,8 +148,8 @@ db:
 
 This lays out the 3 container composition.
 
-Container Name | Apps Running | Description
----------------|--------------|------------
+Container | Apps | Description
+----------|------|------------
 server | Nginx | handles http requests
 page | uWSGI and Django | uWSGI connects nginx to Django and Django generates the page
 db | Postgres | database for page
