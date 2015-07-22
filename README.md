@@ -74,7 +74,7 @@ docker-machine create \
 
 ### Swarm Nodes
 
-We're using a bash loop to create 2 swarm nodes. You can create as many as you want. (Creating 2 on Rackspace took about 3 minutes.)
+We're using a shell loop to create 2 swarm nodes. You can create as many as you want. (Creating 2 on Rackspace took about 3 minutes.)
 
 ```shell
 for((i=0;i<2;i++)); do \
@@ -125,6 +125,30 @@ Total Memory: 3.041 GiB
 
 ## Compose
 
+Now we're going to launch our composition. Clone this [repo](https://github.com/cloudandbigdatalab/chameleon-cloud-tutorial-docker-2.git) and change into the created directory.
+
+You should see a file named `docker-compose.yml` that contains:
+
+```yml
+server:
+  build: ./server
+  ports:
+    - "80"
+  links:
+    - page:page
+
+page:
+  build: ./page
+  expose:
+    - "3031"
+  links:
+    - db:db
+
+db:
+  image: postgres
+```
+
+This layouts out the 3 container composition. The Dockerfiles and code for the containers are in their respective folders. Note for the Postgres container we're using the image unmodified off Docker Hub.
 
 ### Containers in Composition
 
