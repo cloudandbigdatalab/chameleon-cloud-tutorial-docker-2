@@ -110,17 +110,17 @@ Role: primary
 Strategy: spread
 Filters: affinity, health, constraint, port, dependency
 Nodes: 3
- swarm-master: 23.253.107.53:2376
+ docker-swarm-master: 23.253.242.223:2376
   └ Containers: 2
   └ Reserved CPUs: 0 / 1
   └ Reserved Memory: 0 B / 1.014 GiB
   └ Labels: executiondriver=native-0.2, kernelversion=3.13.0-37-generic, operatingsystem=Ubuntu 14.04.1 LTS, provider=rackspace, storagedriver=aufs
- swarm-node-0: 23.253.90.169:2376
+ docker-swarm-node-0: 104.130.127.222:2376
   └ Containers: 1
   └ Reserved CPUs: 0 / 1
   └ Reserved Memory: 0 B / 1.014 GiB
   └ Labels: executiondriver=native-0.2, kernelversion=3.13.0-37-generic, operatingsystem=Ubuntu 14.04.1 LTS, provider=rackspace, storagedriver=aufs
- swarm-node-1: 104.239.132.168:2376
+ docker-swarm-node-1: 104.130.139.18:2376
   └ Containers: 1
   └ Reserved CPUs: 0 / 1
   └ Reserved Memory: 0 B / 1.014 GiB
@@ -143,10 +143,10 @@ The Dockerfiles and code for the containers are in their respective folders. Not
 
 ## Run the Composition
 
-```shell
-docker-compose up -d
-```
+`-p tutorial-2` specifies our project name. Otherwise the name of the directory would be used.
 
-If you modify a container's code or Dockerfile after launching run `docker-compose build` to rebuild then run `docker-compose up -d` again.
+```shell
+docker-compose -p tutorial-2 up -d
+```
 
 ## Scale the Composition

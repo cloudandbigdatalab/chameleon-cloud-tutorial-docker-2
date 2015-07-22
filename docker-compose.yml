@@ -1,12 +1,12 @@
 server:
-  build: cloudandbigdatalab/server:tutorial-2
+  image: cloudandbigdatalab/server:tutorial-2
   ports:
     - "80"
   links:
     - page:page
 
 page:
-  build: cloudandbigdatalab/page:tutorial-2
+  image: cloudandbigdatalab/page:tutorial-2
   expose:
     - "3031"
   links:
