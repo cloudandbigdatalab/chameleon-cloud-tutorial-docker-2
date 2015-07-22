@@ -69,7 +69,7 @@ docker-machine create \
   --swarm \
   --swarm-master \
   --swarm-discovery token://$TOKEN \
-  swarm-master
+  docker-swarm-master
 ```
 
 ### Swarm Nodes
@@ -85,14 +85,14 @@ for((i=0;i<2;i++)); do \
     --rackspace-region $REGION \
     --swarm \
     --swarm-discovery token://$TOKEN \
-    swarm-node-$i; \
+    docker-swarm-node-$i; \
 done
 ```
 
 ### Connect to Swarm Master
 
 ```shell
-eval "$(docker-machine env --swarm swarm-master)"
+eval "$(docker-machine env --swarm docker-swarm-master)"
 ```
 
 You can see info about your swarm with `docker info`. The output should be similar to:
@@ -125,28 +125,7 @@ Total Memory: 3.041 GiB
 
 ## Compose
 
-Now we're going to launch our composition. Clone this [repo](https://github.com/cloudandbigdatalab/chameleon-cloud-tutorial-docker-2.git) and change into the created directory. You should see a file named `docker-compose.yml` that contains:
-
-```yaml
-server:
-  build: ./server
-  ports:
-    - "80"
-  links:
-    - page:page
-
-page:
-  build: ./page
-  expose:
-    - "3031"
-  links:
-    - db:db
-
-db:
-  image: postgres
-```
-
-This lays out the 3 container composition.
+Now we're going to launch our composition. Download the [docker-compose.yml](https://github.com/cloudandbigdatalab/chameleon-cloud-tutorial-docker-2/blob/master/docker-compose.yml) file from our repo. This lays out the 3 container composition.
 
 Container Name | Apps | Description
 ----------|------|------------
