@@ -4,4 +4,4 @@ MAINTAINER shawnmaten@gmail.com
 
 USER postgres
 
-RUN postgres
+RUN initdb
