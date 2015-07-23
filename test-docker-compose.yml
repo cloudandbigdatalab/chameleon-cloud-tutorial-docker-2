@@ -1,4 +1,0 @@
-server:
-  build: ./server
-  ports:
-    - "80"

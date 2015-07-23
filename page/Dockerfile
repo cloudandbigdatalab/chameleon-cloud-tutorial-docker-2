@@ -3,7 +3,7 @@ FROM django
 MAINTAINER shawnmaten@gmail.com
 
 RUN apt-get update && apt-get install -y \
-  nc 
+  netcat
 
 RUN pip install uwsgi
 
