@@ -10,4 +10,8 @@ COPY test_site/ ./test_site/
 
 COPY uwsgi.ini ./
 
+COPY startup.sh ./
+
+ENTRYPOINT ["./startup.sh"]
+
 CMD python ./test_site/manage.py migrate && uwsgi uwsgi.ini

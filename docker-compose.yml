@@ -13,4 +13,4 @@ page:
     - db:db
 
 db:
-  image: cloudandbigdatalab/db:tutorial-2
+  image: postgres
