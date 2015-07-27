@@ -3,23 +3,23 @@ server:
   links:
     - proxy:page
   ports:
-    - "80:80"
+    - "80"
 
 proxy:
   image: tutum/haproxy
   links:
     - page
-  environment:
-    - FRONTEND_PORT = 3031
-    - BACKEND_PORT = 3031
-    - MODE = tcp
   expose:
-    - "3031"
+    - "80"
+  ports:
+    - "1936"
 
 page:
   image: cloudandbigdatalab/page:tutorial-2
   expose:
     - "3031"
+  environment:
+    - TCP_PORTS = 3031
   links:
     - db:db
 
