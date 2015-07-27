@@ -1,9 +1,20 @@
 server:
   image: cloudandbigdatalab/server:tutorial-2
-  ports:
-    - "80"
   links:
-    - page:page
+    - proxy:page
+  ports:
+    - "80:80"
+
+proxy:
+  image: tutum/haproxy
+  links:
+    - page
+  environment:
+    - FRONTEND_PORT = 3031
+    - BACKEND_PORT = 3031
+    - MODE = tcp
+  expose:
+    - "3031"
 
 page:
   image: cloudandbigdatalab/page:tutorial-2
