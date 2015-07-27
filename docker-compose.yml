@@ -1,9 +1,9 @@
 server:
   image: nginx
   ports:
-    - "80"
+    - "80:80"
   volumes:
-    - /Users/shawnaten/Documents/cloudAndBigDataLab/chameleon-cloud-tutorial-docker-2/server/test-site.conf:/etc/nginx/conf.d/test-site.conf
+    - /Users/shawnaten/Documents/cloudAndBigDataLab/chameleon-cloud-tutorial-docker-2/page/:/etc/nginx/conf.d/
 
 page:
   image: cloudandbigdatalab/page:tutorial-2

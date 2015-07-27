@@ -13,6 +13,4 @@ COPY test_site/ ./test_site/
 
 COPY uwsgi.ini ./
 
-COPY startup.sh ./
-
-ENTRYPOINT ["./startup.sh"]
+ENTRYPOINT ["uwsgi", "uwsgi.ini"]
