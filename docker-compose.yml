@@ -10,9 +10,11 @@ proxy:
   links:
     - page
   expose:
-    - "80"
+    - "3031:80"
   ports:
     - "1936"
+  environment:
+    - MODE = tcp
 
 page:
   image: cloudandbigdatalab/page:tutorial-2
