@@ -6,22 +6,18 @@ server:
     - "80"
 
 proxy:
-  image: tutum/haproxy
+  image:
   links:
     - page
   expose:
     - "80"
-  ports:
-    - "1936"
-  environment:
-    - MODE = tcp
 
 page:
   image: cloudandbigdatalab/page:tutorial-2
   expose:
-    - "3031"
+    - "80"
   environment:
-    - TCP_PORTS = 3031
+    - TCP_PORTS = 80
   links:
     - db:db
 
