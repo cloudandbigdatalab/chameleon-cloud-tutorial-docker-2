@@ -37,29 +37,42 @@ We're using Rackspace because Machine doesn't currently support passing in reser
 
 For this demo we used a personal MacBook running OS X but installation instructions are available for basically any OS. Here are the instructions for [Machine](https://docs.docker.com/machine/#installation) and [Compose](https://docs.docker.com/compose/install/). **If you're getting "Permission Denied" using curl, run `sudo -i` to become root, run the commands, then `exit`.**
 
-### Swarm Token
+**Experimental Docker Installation**
 
-Create a machine. We're naming it `docker-main`.
+```shell
+sudo -i
+curl -L https://experimental.docker.com/builds/Darwin/x86_64/docker-latest > /usr/local/bin/docker
+chmod +x /usr/local/bin/docker
+exit
+```
+
+### Consul
 
 ```shell
 docker-machine create \
   -d rackspace \
-  --rackspace-username $USERNAME \
-  --rackspace-api-key $API_KEY \
-  --rackspace-region $REGION \
+  --engine-install-url="https://experimental.docker.com" \
+  consul
+
+docker $(docker-machine config consul) run -d \
+  -p "8500:8500" \
+  -h "consul" \
+  progrium/consul -server -bootstrap
+```
+
+### Swarm Token
+
+Create a machine. We're naming it `docker-main`. Point docker at the machine then generate a token. Save the token for later.
+
+```shell
+docker-machine create \
+  -d rackspace \
+  --engine-install-url="https://experimental.docker.com" \
   docker-main
-```
 
-Load the machine env variables.
-
-```shell
 eval "$(docker-machine env docker-main)"
-```
 
-Generate a token. Save the token for later. You can set it as env variable if you'd like.
-
-```shell
-docker run swarm create
+export SWARM_TOKEN=$(docker run swarm create)
 ```
 
 ### Swarm Master
@@ -69,64 +82,86 @@ Create the Swarm master.
 ```shell
 docker-machine create \
   -d rackspace \
-  --rackspace-username $USERNAME \
-  --rackspace-api-key $API_KEY \
-  --rackspace-region $REGION \
-  --swarm \
-  --swarm-master \
-  --swarm-discovery token://$TOKEN \
-  docker-swarm-master
+  --engine-install-url="https://experimental.docker.com" \
+  --engine-opt="default-network=overlay:multihost" \
+  --engine-opt="kv-store=consul:$(docker-machine ip consul):8500" \
+  --engine-label="com.docker.network.driver.overlay.bind_interface=eth0" \
+  swarm-0
 ```
 
-### Swarm Nodes
-
-We're using a shell loop to create 2 swarm nodes. You can create as many as you want. (Creating 2 on Rackspace took about 3 minutes.)
-
+### Startup Swarm
 ```shell
-for((i=0;i<2;i++)); do \
-  docker-machine create \
-    -d rackspace \
-    --rackspace-username $USERNAME \
-    --rackspace-api-key $API_KEY \
-    --rackspace-region $REGION \
-    --swarm \
-    --swarm-discovery token://$TOKEN \
-    docker-swarm-node-$i; \
-done
+docker $(docker-machine config swarm-0) run -d \
+  --restart="always" \
+  --net="bridge" \
+  swarm:latest join \
+    --addr "$(docker-machine ip swarm-0):2376" \
+    "token://$SWARM_TOKEN"
+
+docker $(docker-machine config swarm-0) run -d \
+  --restart="always" \
+  --net="bridge" \
+  -p "3376:3376" \
+  -v "/etc/docker:/etc/docker" \
+  swarm:latest manage \
+    --tlsverify \
+    --tlscacert="/etc/docker/ca.pem" \
+    --tlscert="/etc/docker/server.pem" \
+    --tlskey="/etc/docker/server-key.pem" \
+    -H "tcp://0.0.0.0:3376" \
+    --strategy spread \
+    "token://$SWARM_TOKEN"
 ```
 
-### Connect to Swarm Master
+### Swarm Node
 
 ```shell
-eval "$(docker-machine env --swarm docker-swarm-master)"
+docker-machine create \
+  -d rackspace \
+  --engine-install-url="https://experimental.docker.com" \
+  --engine-opt="default-network=overlay:multihost" \
+  --engine-opt="kv-store=consul:$(docker-machine ip consul):8500" \
+  --engine-label="com.docker.network.driver.overlay.bind_interface=eth0" \
+  --engine-label="com.docker.network.driver.overlay.neighbor_ip=$(docker-machine ip swarm-0)" \
+  swarm-1
+
+docker $(docker-machine config swarm-1) run -d \
+  --restart="always" \
+  --net="bridge" \
+  swarm:latest join \
+    --addr "$(docker-machine ip swarm-1):2376" \
+    "token://$SWARM_TOKEN"
+```
+
+### Point Docker at Swarm
+
+```shell
+export DOCKER_HOST=tcp://"$(docker-machine ip swarm-0):3376"
+export DOCKER_TLS_VERIFY=1
+export DOCKER_CERT_PATH="$HOME/.docker/machine/machines/swarm-0"
 ```
 
 You can see info about your swarm with `docker info`. The output should be similar to:
 
 ```shell
-Containers: 4
-Images: 3
+Containers: 3
+Images: 2
 Role: primary
 Strategy: spread
 Filters: affinity, health, constraint, port, dependency
-Nodes: 3
- docker-swarm-master: 23.253.242.223:2376
+Nodes: 2
+ swarm-0: 104.239.144.81:2376
   └ Containers: 2
   └ Reserved CPUs: 0 / 1
   └ Reserved Memory: 0 B / 1.014 GiB
-  └ Labels: executiondriver=native-0.2, kernelversion=3.13.0-37-generic, operatingsystem=Ubuntu 14.04.1 LTS, provider=rackspace, storagedriver=aufs
- docker-swarm-node-0: 104.130.127.222:2376
+  └ Labels: com.docker.network.driver.overlay.bind_interface=eth0, executiondriver=native-0.2, kernelversion=3.13.0-37-generic, operatingsystem=Ubuntu 14.04.1 LTS, provider=rackspace, storagedriver=aufs
+ swarm-1: 23.253.125.161:2376
   └ Containers: 1
   └ Reserved CPUs: 0 / 1
   └ Reserved Memory: 0 B / 1.014 GiB
-  └ Labels: executiondriver=native-0.2, kernelversion=3.13.0-37-generic, operatingsystem=Ubuntu 14.04.1 LTS, provider=rackspace, storagedriver=aufs
- docker-swarm-node-1: 104.130.139.18:2376
-  └ Containers: 1
-  └ Reserved CPUs: 0 / 1
-  └ Reserved Memory: 0 B / 1.014 GiB
-  └ Labels: executiondriver=native-0.2, kernelversion=3.13.0-37-generic, operatingsystem=Ubuntu 14.04.1 LTS, provider=rackspace, storagedriver=aufs
-CPUs: 3
-Total Memory: 3.041 GiB
+  └ Labels: com.docker.network.driver.overlay.bind_interface=eth0, com.docker.network.driver.overlay.neighbor_ip=104.239.144.81, executiondriver=native-0.2, kernelversion=3.13.0-37-generic, operatingsystem=Ubuntu 14.04.1 LTS, provider=rackspace, storagedriver=aufs
+CPUs: 2
+Total Memory: 2.027 GiB
 ```
 
 ## Compose

@@ -1,11 +1,16 @@
 server:
-  image: nginx
+  image: cloudandbigdatalab/server:tutorial-2
   ports:
-    - "80:80"
-  volumes:
-    - /Users/shawnaten/Documents/cloudAndBigDataLab/chameleon-cloud-tutorial-docker-2/page/:/etc/nginx/conf.d/
+    - "80"
+  links:
+    - page:page
 
 page:
   image: cloudandbigdatalab/page:tutorial-2
-  ports:
+  expose:
     - "3031"
+  links:
+    - db:db
+
+db:
+  image: postgres
