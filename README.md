@@ -49,26 +49,28 @@ exit
 ### Consul
 
 ```shell
-docker-machine create \
-  -d rackspace \
-  --engine-install-url="https://experimental.docker.com" \
-  consul
+docker-machine --debug create \
+    -d rackspace \
+    --engine-install-url="https://experimental.docker.com" \
+    consul
 
 docker $(docker-machine config consul) run -d \
-  -p "8500:8500" \
-  -h "consul" \
-  progrium/consul -server -bootstrap
+    -p "8500:8500" \
+    -h "consul" \
+    progrium/consul -server -bootstrap
 ```
+
+<script src="https://gist.github.com/shawnaten/2cb72e5811552fefe220.js"></script>
 
 ### Swarm Token
 
 Create a machine. We're naming it `docker-main`. Point docker at the machine then generate a token. Save the token for later.
 
 ```shell
-docker-machine create \
-  -d rackspace \
-  --engine-install-url="https://experimental.docker.com" \
-  docker-main
+docker-machine --debug create \
+    -d rackspace \
+    --engine-install-url="https://experimental.docker.com" \
+    docker-main
 
 eval "$(docker-machine env docker-main)"
 
@@ -80,88 +82,78 @@ export SWARM_TOKEN=$(docker run swarm create)
 Create the Swarm master.
 
 ```shell
-docker-machine create \
-  -d rackspace \
-  --engine-install-url="https://experimental.docker.com" \
-  --engine-opt="default-network=overlay:multihost" \
-  --engine-opt="kv-store=consul:$(docker-machine ip consul):8500" \
-  --engine-label="com.docker.network.driver.overlay.bind_interface=eth0" \
-  swarm-0
+docker-machine --debug create \
+    -d rackspace \
+    --rackspace-image-id="668b0764-4936-4eec-a2f2-3b5bb2c40b26" \
+    --engine-install-url="https://experimental.docker.com" \
+    --engine-opt="default-network=overlay:multihost" \
+    --engine-opt="kv-store=consul:$(docker-machine ip consul):8500" \
+    --engine-label="com.docker.network.driver.overlay.bind_interface=eth0" \
+    swarm-0
 ```
 
 ### Startup Swarm
 ```shell
 docker $(docker-machine config swarm-0) run -d \
-  --restart="always" \
-  --net="bridge" \
-  swarm:latest join \
-    --addr "$(docker-machine ip swarm-0):2376" \
-    "token://$SWARM_TOKEN"
+    --restart="always" \
+    --net="bridge" \
+    swarm:latest join \
+        --addr "$(docker-machine ip swarm-0):2376" \
+        "token://$SWARM_TOKEN"
 
 docker $(docker-machine config swarm-0) run -d \
-  --restart="always" \
-  --net="bridge" \
-  -p "3376:3376" \
-  -v "/etc/docker:/etc/docker" \
-  swarm:latest manage \
-    --tlsverify \
-    --tlscacert="/etc/docker/ca.pem" \
-    --tlscert="/etc/docker/server.pem" \
-    --tlskey="/etc/docker/server-key.pem" \
-    -H "tcp://0.0.0.0:3376" \
-    --strategy spread \
-    "token://$SWARM_TOKEN"
+    --restart="always" \
+    --net="bridge" \
+    -p "3376:3376" \
+    -v "/etc/docker:/etc/docker" \
+    swarm:latest manage \
+        --tlsverify \
+        --tlscacert="/etc/docker/ca.pem" \
+        --tlscert="/etc/docker/server.pem" \
+        --tlskey="/etc/docker/server-key.pem" \
+        -H "tcp://0.0.0.0:3376" \
+        --strategy spread \
+        "token://$SWARM_TOKEN"
 ```
 
-### Swarm Node
+### Swarm Nodes
 
 ```shell
-docker-machine create \
+
+for((i=1;i<3;i++)); do \
+
+docker-machine --debug create \
   -d rackspace \
+  --rackspace-image-id="668b0764-4936-4eec-a2f2-3b5bb2c40b26" \
   --engine-install-url="https://experimental.docker.com" \
   --engine-opt="default-network=overlay:multihost" \
   --engine-opt="kv-store=consul:$(docker-machine ip consul):8500" \
   --engine-label="com.docker.network.driver.overlay.bind_interface=eth0" \
   --engine-label="com.docker.network.driver.overlay.neighbor_ip=$(docker-machine ip swarm-0)" \
-  swarm-1
+  swarm-$i
 
-docker $(docker-machine config swarm-1) run -d \
+docker $(docker-machine config swarm-$i) run -d \
   --restart="always" \
   --net="bridge" \
   swarm:latest join \
-    --addr "$(docker-machine ip swarm-1):2376" \
-    "token://$SWARM_TOKEN"
+      --addr "$(docker-machine ip swarm-$i):2376" \
+      "token://$SWARM_TOKEN"
+
+done
 ```
 
 ### Point Docker at Swarm
 
 ```shell
-export DOCKER_HOST=tcp://"$(docker-machine ip swarm-0):3376"
+export DOCKER_HOST=tcp://"$(docker-machine ip docker-swarm-master):3376"
 export DOCKER_TLS_VERIFY=1
-export DOCKER_CERT_PATH="$HOME/.docker/machine/machines/swarm-0"
+export DOCKER_CERT_PATH="$HOME/.docker/machine/machines/docker-swarm-master"
 ```
 
 You can see info about your swarm with `docker info`. The output should be similar to:
 
 ```shell
-Containers: 3
-Images: 2
-Role: primary
-Strategy: spread
-Filters: affinity, health, constraint, port, dependency
-Nodes: 2
- swarm-0: 104.239.144.81:2376
-  └ Containers: 2
-  └ Reserved CPUs: 0 / 1
-  └ Reserved Memory: 0 B / 1.014 GiB
-  └ Labels: com.docker.network.driver.overlay.bind_interface=eth0, executiondriver=native-0.2, kernelversion=3.13.0-37-generic, operatingsystem=Ubuntu 14.04.1 LTS, provider=rackspace, storagedriver=aufs
- swarm-1: 23.253.125.161:2376
-  └ Containers: 1
-  └ Reserved CPUs: 0 / 1
-  └ Reserved Memory: 0 B / 1.014 GiB
-  └ Labels: com.docker.network.driver.overlay.bind_interface=eth0, com.docker.network.driver.overlay.neighbor_ip=104.239.144.81, executiondriver=native-0.2, kernelversion=3.13.0-37-generic, operatingsystem=Ubuntu 14.04.1 LTS, provider=rackspace, storagedriver=aufs
-CPUs: 2
-Total Memory: 2.027 GiB
+
 ```
 
 ## Compose
