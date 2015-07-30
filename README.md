@@ -1,6 +1,6 @@
 # Chameleon Cloud Tutorial - Docker Machine, Compose, and Swarm
 
-**Because of incompatibilities, part of this tutorial uses the Rackspace cloud instead of Chameleon resources. See the [Machine](#machine) section for details.**
+**Because of incompatibilities, part of this tutorial uses the Rackspace cloud instead of Chameleon resources. See the [Machine](#Machine) section for details.**
 
 This tutorial will cover using Docker Machine, Compose and Swarm. Ultimately these tools are intended to be used together but because they're not yet mature that synthesis is limited. We'll discuss the limitations in more detail throughout the tutorial. We'll instead focus on using each tool individually and demonstrate them together in ways that currently work.
 
