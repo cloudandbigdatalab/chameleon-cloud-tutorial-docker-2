@@ -32,8 +32,14 @@ sudo yum update -y
 
 sudo yum install -y docker
 
+sudo groupadd docker
+
+sudo usermod -a -G docker cc
+
 sudo systemctl start docker.service
 ```
+
+We also created a user group `docker` and added the default `cc` user to it before starting the Docker daemon. **After logging out and back in you will no longer have to use sudo with the Docker client or tools.**
 
 Then follow these instructions to install [Machine](https://docs.docker.com/machine/#installation) and [Compose](https://docs.docker.com/compose/install/). **If you're getting "Permission Denied" using curl, run `sudo -i` to become root, run the commands, then `exit`.**
 
@@ -64,15 +70,22 @@ db | Postgres | database for page, Django connects to Postgres
 ### Run the Composition
 
 ```shell
-sudo docker-compose -p tutorial up -d
+docker-compose -p tutorial up -d
 ```
 
-`-p tutorial` specifies our project name. Otherwise it uses the name of the current directory.
+`-p tutorial` specifies our project name. Otherwise it uses the name of the current directory. If the images had been changed and we wanted to run the updated versions we would run
+
+```sh
+docker-compose pull
+docker-compose -p tutorial up -d
+```
+
+and the images would be pulled and our containers restarted.
 
 Check your running containers.
 
 ```sh
-sudo docker-compose -p tutorial ps
+docker-compose -p tutorial ps
 ```
 
 The output should look similar to this.
@@ -86,3 +99,46 @@ tutorial_server_1   nginx -g daemon off;             Up      443/tcp, 0.0.0.0:80
 ```
 
 Now if you visit the ip of your Chameleon machine in the browser you should see the page running.
+
+## Docker Machine
+
+So now we're going to do the same thing but we're going to run our composition on a Docker host we setup with Machine. As we outlined in the introduciton we can't use Machine to create hosts on Chameleon (or VM's) so we're using Rackspace.
+
+### Create a host
+
+We have our account information in environment variables in this example. `-d rackspace` specifies the *driver* as Rackspace. This will take several minutes.
+
+```sh
+docker-machine create -d rackspace docker-main
+```
+
+### Point Docker at Remote Machine
+
+```sh
+eval "$(docker-machine env docker-main)"
+```
+Now if we run `docker ps` the 3 containers our gone because we're looking at the remote host.
+
+### Run Composition on Remote Host
+
+The commands are exactly the same as before.
+
+Run composition.
+
+```sh
+docker-compose -p tutorial up -d
+```
+
+Check our running containers.
+
+```sh
+docker-compose -p tutorial ps
+```
+
+To see the ip of our remote machine.
+
+```sh
+docker-machine ip docker-main
+```
+
+Then if you visit the ip in the browser you should see the same page as before. Note that the top left string on the page is the id of the page container. It will be different from before.
