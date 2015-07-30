@@ -75,6 +75,8 @@ Check your running containers.
 sudo docker-compose -p tutorial ps
 ```
 
+The output should look similar to this.
+
 ```sh
 Name                     Command               State              Ports
 ----------------------------------------------------------------------------------------
