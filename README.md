@@ -41,7 +41,7 @@ If you're going to try to use Machine with Rackspace, VM's, or another provider 
 
 ## Docker Compose
 
-With Compose you outline your container configuration and arrangement with a YAML file name docker-compose.yml. Our [docker-compose.yml](https://github.com/cloudandbigdatalab/chameleon-cloud-tutorial-docker-2/blob/master/docker-compose.yml) is on our GitHub. This lays out the 3 container composition. In our docker-compose.yml we specify to pull out images from Docker Hub. All the resources, including the Dockerfile, to build these images is available on our [GitHub](https://github.com/cloudandbigdatalab/chameleon-cloud-tutorial-docker-2). If you wanted to build the images yourself or make modifications, download the repo then change
+With Compose you outline your container configuration and arrangement with a YAML file name docker-compose.yml. Our [docker-compose.yml](https://github.com/cloudandbigdatalab/chameleon-cloud-tutorial-docker-2/raw/master/docker-compose.yml) is on our GitHub. This lays out the 3 container composition. In our docker-compose.yml we specify to pull out images from Docker Hub. All the resources, including the Dockerfile, to build these images is available on our [GitHub](https://github.com/cloudandbigdatalab/chameleon-cloud-tutorial-docker-2). If you wanted to build the images yourself or make modifications, download the repo then change
 
 ```yml
 image: cloudandbigdatalab/server:tutorial-2
@@ -64,7 +64,7 @@ db | Postgres | database for page, Django connects to Postgres
 ### Run the Composition
 
 ```shell
-docker-compose -p tutorial up -d
+sudo docker-compose -p tutorial up -d
 ```
 
 `-p tutorial` specifies our project name. Otherwise it uses the name of the current directory.
