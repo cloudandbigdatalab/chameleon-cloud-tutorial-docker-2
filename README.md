@@ -248,7 +248,7 @@ If we run
 docker-compose -p tutorial ps
 ```
 
-and look at the output
+and look at the output we see a single worker container running.
 
 ```sh
 Name                     Command               State   Ports
@@ -256,13 +256,13 @@ Name                     Command               State   Ports
 tutorial_worker_1   /bin/sh -c /etc/init.d/FAH ...   Up
 ```
 
-we see a single worker container running. We can scale our *worker* service to 6.
+We can scale our *worker* service to 6.
 
 ```sh
 docker-compose -p tutorial scale worker=6
 ```
 
-Now if we run `ps` again and look at the output
+Now if we run `docker-compose -p tutorial ps` again and look at the output we should see multiple worker containers running.
 
 ```sh
 Name                     Command               State   Ports
@@ -275,9 +275,7 @@ tutorial_worker_5   /bin/sh -c /etc/init.d/FAH ...   Up
 tutorial_worker_6   /bin/sh -c /etc/init.d/FAH ...   Up
 ```
 
-we should see multiple worker containers running.
-
-If we run `docker ps` we can look at the `NAME` field and see that our containers our spread across the 3 hosts in our cluster.
+If we run `docker ps` we can look at the `NAMES` field and see that our containers our spread across the 3 hosts in our cluster.
 
 ```sh
 CONTAINER ID        IMAGE                        COMMAND                CREATED              STATUS              PORTS               NAMES
@@ -288,3 +286,7 @@ fd381b18544e        jordan0day/folding-at-home   "/bin/sh -c '/etc/in   About a 
 c2edd0380540        jordan0day/folding-at-home   "/bin/sh -c '/etc/in   About a minute ago   Up About a minute                       swarm-node-1/tutorial_worker_2
 8ddadc49ec72        jordan0day/folding-at-home   "/bin/sh -c '/etc/in   2 minutes ago        Up 2 minutes                            swarm-node-0/tutorial_worker_1
 ```
+
+## Conclusion
+
+Docker intends for Compose, Machine, and Swarm to work together to enable simple yet powerful workflows. The experience of putting this tutorial together shows that's not reality today. However, Compose and Machine work pretty well on their own barring Machine's Chameleon incompatibility. The synthesis between Compose and Machine is also solid right now. Swarm is problematic and not as useful as one might initially think. But Docker does disclaim that these tools are not production ready yet. In the future they should work better for multi-container apps and services.
