@@ -39,7 +39,7 @@ If you're going to try to use Machine with Rackspace, VM's, or another provider 
 
 ## Docker Compose
 
-With Compose you outline your container configuration and arrangement with a YAML file name docker-compose.yml. Our [docker-compose.yml](https://github.com/cloudandbigdatalab/chameleon-cloud-tutorial-docker-2/blob/master/docker-compose.yml) is on our GitHub. This lays out the 3 container composition. In our docker-compose.yml we specify to pull out images from Docker Hub. All the resources, including the Dockerfile, to build these images is available on our [GitHub](https://github.com/cloudandbigdatalab/chameleon-cloud-tutorial-docker-2). If you wanted to build the images yourself or make modifications you download the repo then change the lines from
+With Compose you outline your container configuration and arrangement with a YAML file name docker-compose.yml. Our [docker-compose.yml](https://github.com/cloudandbigdatalab/chameleon-cloud-tutorial-docker-2/blob/master/docker-compose.yml) is on our GitHub. This lays out the 3 container composition. In our docker-compose.yml we specify to pull out images from Docker Hub. All the resources, including the Dockerfile, to build these images is available on our [GitHub](https://github.com/cloudandbigdatalab/chameleon-cloud-tutorial-docker-2). If you wanted to build the images yourself or make modifications, download the repo then change the line from
 
 ```yml
 image: cloudandbigdatalab/server:tutorial-2
@@ -51,7 +51,7 @@ to
 build: ./server
 ```
 
-assuming the Dockerfile for server is in the server folder within the current directory. Note for the db container we're using the unmodified Postgres image off Docker Hub so their isn't a folder for it. Here's a quick explanation of what's going on with our composition.
+to build and use a local image. We're assuming the Dockerfile for server is in the server folder within the current directory. Note for the db container we're using the unmodified Postgres image off Docker Hub so their isn't a folder for it. Here's a quick explanation of what's going on with our composition.
 
 Container Name | Apps | Description
 ----------|------|------------
