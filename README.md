@@ -231,5 +231,60 @@ Name:
 ID:
 Http Proxy:
 Https Proxy:
-No Proxy: 
+No Proxy:
+```
+
+### Run Composition
+
+Note that you need to download the docker-compose.yml into a different directory from earlier and run Compose from there.
+
+```sh
+docker-compose -p tutorial up -d
+```
+
+If we run
+
+```sh
+docker-compose -p tutorial ps
+```
+
+and look at the output
+
+```sh
+Name                     Command               State   Ports
+------------------------------------------------------------------
+tutorial_worker_1   /bin/sh -c /etc/init.d/FAH ...   Up
+```
+
+we see a single worker container running. We can scale our *worker* service to 6.
+
+```sh
+docker-compose -p tutorial scale worker=6
+```
+
+Now if we run `ps` again and look at the output
+
+```sh
+Name                     Command               State   Ports
+------------------------------------------------------------------
+tutorial_worker_1   /bin/sh -c /etc/init.d/FAH ...   Up
+tutorial_worker_2   /bin/sh -c /etc/init.d/FAH ...   Up
+tutorial_worker_3   /bin/sh -c /etc/init.d/FAH ...   Up
+tutorial_worker_4   /bin/sh -c /etc/init.d/FAH ...   Up
+tutorial_worker_5   /bin/sh -c /etc/init.d/FAH ...   Up
+tutorial_worker_6   /bin/sh -c /etc/init.d/FAH ...   Up
+```
+
+we should see multiple worker containers running.
+
+If we run `docker ps` we can look at the `NAME` field and see that our containers our spread across the 3 hosts in our cluster.
+
+```sh
+CONTAINER ID        IMAGE                        COMMAND                CREATED              STATUS              PORTS               NAMES
+faadba6dff79        jordan0day/folding-at-home   "/bin/sh -c '/etc/in   About a minute ago   Up About a minute                       swarm-master/tutorial_worker_6
+3457647206b0        jordan0day/folding-at-home   "/bin/sh -c '/etc/in   About a minute ago   Up About a minute                       swarm-node-1/tutorial_worker_5
+97daf03f52c2        jordan0day/folding-at-home   "/bin/sh -c '/etc/in   About a minute ago   Up About a minute                       swarm-node-0/tutorial_worker_4
+fd381b18544e        jordan0day/folding-at-home   "/bin/sh -c '/etc/in   About a minute ago   Up About a minute                       swarm-master/tutorial_worker_3
+c2edd0380540        jordan0day/folding-at-home   "/bin/sh -c '/etc/in   About a minute ago   Up About a minute                       swarm-node-1/tutorial_worker_2
+8ddadc49ec72        jordan0day/folding-at-home   "/bin/sh -c '/etc/in   2 minutes ago        Up 2 minutes                            swarm-node-0/tutorial_worker_1
 ```
