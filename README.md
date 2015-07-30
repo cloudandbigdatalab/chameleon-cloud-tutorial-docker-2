@@ -65,14 +65,4 @@ db | Postgres | database for page, Django connects to Postgres
 docker-compose -p tutorial up -d
 ```
 
-`-p tutorial` specifies our project name. Otherwise the name of the directory would be used.
-
-
-
-### Setup Swarm Cluster
-
-**For this tutorial we're using a personal laptop and the Rackspace cloud.**
-
-We're using a personal laptop because it's sensible to control remote machines from a local machine rather than SSH'ing to a remote machine to control remote machines. However, you can do all your work from a Chameleon instance. Every step is the same past installation, except you'll need to add `sudo` to your commands on the default Chameleon CentOS image.
-
-We're using Rackspace because Machine doesn't currently support passing in reservation ids during host creation and therefore does not work with Chameleon.
+`-p tutorial` specifies our project name. Otherwise it uses the name of the current directory.
