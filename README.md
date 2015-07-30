@@ -19,10 +19,14 @@ It's expected that you have gone through [Docker Tutorial 1](http://cloudandbigd
 
 ## Steps Outline
 
-\# | Task | Time (mins)
+The whole tutorial (barring problems) will probably take 45 mins to an hour. It can take a long time to update your Chameleon instance and creating hosts with Machine can take a few minutes per host. How long your hosts take to create depends on the type and provider.
+
+\# | Task | Approximate Time (mins)
 ---|-------------|------------
 1 | Setup | 20
-2 |
+2 | Compose | 5
+3 | Machine | 10
+4 | Swarm | 20
 
 ## Setup
 
