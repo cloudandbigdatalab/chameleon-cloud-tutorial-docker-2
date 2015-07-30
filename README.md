@@ -19,9 +19,10 @@ It's expected that you have gone through [Docker Tutorial 1](http://cloudandbigd
 
 ## Steps Outline
 
-\# | Description | Time (mins)
+\# | Task | Time (mins)
 ---|-------------|------------
-? | ? | ?
+1 | Setup | 20
+2 |
 
 ## Setup
 
@@ -45,7 +46,7 @@ Then follow these instructions to install [Machine](https://docs.docker.com/mach
 
 If you're going to try to use Machine with Rackspace, VM's, or another provider follow they're docs to get setup.  It's fairly easy to complete the demo with VM's on your own physical machine.
 
-## Docker Compose
+## Compose
 
 With Compose you outline your container configuration and arrangement with a YAML file name docker-compose.yml. Our [docker-compose.yml](https://github.com/cloudandbigdatalab/chameleon-cloud-tutorial-docker-2/raw/master/docker-compose.yml) is on our GitHub. This lays out the 3 container composition. In our docker-compose.yml we specify to pull out images from Docker Hub. All the resources, including the Dockerfile, to build these images is available on our [GitHub](https://github.com/cloudandbigdatalab/chameleon-cloud-tutorial-docker-2). If you wanted to build the images yourself or make modifications, download the repo then change
 
@@ -100,7 +101,7 @@ tutorial_server_1   nginx -g daemon off;             Up      443/tcp, 0.0.0.0:80
 
 Now if you visit the ip of your Chameleon machine in the browser you should see the page running.
 
-## Docker Machine
+## Machine
 
 So now we're going to do the same thing but we're going to run our composition on a Docker host we setup with Machine. As we outlined in the introduciton we can't use Machine to create hosts on Chameleon (or VM's) so we're using Rackspace.
 
@@ -143,7 +144,7 @@ docker-machine ip docker-main
 
 Then if you visit the ip in the browser you should see the same page as before. Note that the top left string on the page is the id of the page container. It will be different from before.
 
-## Docker Swarm
+## Swarm
 
 As noted in the introduction we'll be using Rackspace for this part of the tutorial as well. It is possible to manually setup a Swarm cluster of Chameleon Docker hosts but we won't be doing that here. We'll be using Machine which simplifies the process.
 
