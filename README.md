@@ -60,8 +60,6 @@ docker $(docker-machine config consul) run -d \
     progrium/consul -server -bootstrap
 ```
 
-<script src="https://gist.github.com/shawnaten/2cb72e5811552fefe220.js"></script>
-
 ### Swarm Token
 
 Create a machine. We're naming it `docker-main`. Point docker at the machine then generate a token. Save the token for later.
