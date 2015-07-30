@@ -142,3 +142,94 @@ docker-machine ip docker-main
 ```
 
 Then if you visit the ip in the browser you should see the same page as before. Note that the top left string on the page is the id of the page container. It will be different from before.
+
+## Docker Swarm
+
+As noted in the introduction we'll be using Rackspace for this part of the tutorial as well. It is possible to manually setup a Swarm cluster of Chameleon Docker hosts but we won't be doing that here. We'll be using Machine which simplifies the process.
+
+### Our Composition
+
+For this demo we can't really use the multi-container setup we used earlier. This is for two reasons:
+
+1. Currently linked containers must be run on the same host. This defeats the point of Swarm. Docker's networking is being overhauled to allow cross-host links and the feature is available in experimental builds. We were unable to get it working at the time of this writing however.
+
+2. Even with cross-host linking, there's no automatic proxying or load balancing. So if for example we scaled the page container to 10, that's easy enough. But we'd also have to configure Nginx to load balance between those containers. Or we could have a proxy container in between the two. This is all possible but again we didn't get it working at the time of this writing. This is something you must build into your app design, there's no automatic mechanisms for this as of yet.
+
+We're still using an (extremely sparse) [docker-compose.yml](https://github.com/cloudandbigdatalab/chameleon-cloud-tutorial-docker-2/raw/master/swarm/docker-compose.yml) for this. It consists of one service / container that runs [folding@home](https://folding.stanford.edu). We're going to run it and scale it across a few nodes.
+
+### Generate Swarm Token
+
+We're generating the token and saving to an environment variable.
+
+export SWARM_TOKEN=$(docker run swarm create)
+
+### Swarm Master
+
+Again the account information needed for Rackspace is stored in environment variables. Creating the machine will a few minutes.
+
+```sh
+docker-machine create -d rackspace --swarm --swarm-master \
+  --swarm-discovery=token://$SWARM_TOKEN docker-swarm-master
+```
+
+### Swarm Nodes
+
+Here we're using a bash loop to create 2 nodes.
+
+```sh
+for ((i = 0; i < 2; i++)); do \
+  docker-machine create -d rackspace --swarm \
+    --swarm-discovery=token://$SWARM_TOKEN docker-swarm-node-$i; \
+done
+```
+
+### Point Docker at Swarm
+
+Now we're going to point the Docker client at our Swarm cluster.
+
+```sh
+eval "$(docker-machine env --swarm docker-swarm-master)"
+```
+
+We can see info about the swarm with
+
+```sh
+docker info
+```
+
+which should output something like this.
+
+```sh
+Containers: 4
+Images: 3
+Storage Driver:
+Role: primary
+Strategy: spread
+Filters: affinity, health, constraint, port, dependency
+Nodes: 3
+ swarm-master: 104.130.134.163:2376
+  └ Containers: 2
+  └ Reserved CPUs: 0 / 1
+  └ Reserved Memory: 0 B / 1.014 GiB
+  └ Labels: executiondriver=native-0.2, kernelversion=3.13.0-37-generic, operatingsystem=Ubuntu 14.04.1 LTS, provider=rackspace, storagedriver=aufs
+ swarm-node-0: 104.130.134.175:2376
+  └ Containers: 1
+  └ Reserved CPUs: 0 / 1
+  └ Reserved Memory: 0 B / 1.014 GiB
+  └ Labels: executiondriver=native-0.2, kernelversion=3.13.0-37-generic, operatingsystem=Ubuntu 14.04.1 LTS, provider=rackspace, storagedriver=aufs
+ swarm-node-1: 104.130.134.76:2376
+  └ Containers: 1
+  └ Reserved CPUs: 0 / 1
+  └ Reserved Memory: 0 B / 1.014 GiB
+  └ Labels: executiondriver=native-0.2, kernelversion=3.13.0-37-generic, operatingsystem=Ubuntu 14.04.1 LTS, provider=rackspace, storagedriver=aufs
+Execution Driver:
+Kernel Version:
+Operating System:
+CPUs: 3
+Total Memory: 3.041 GiB
+Name:
+ID:
+Http Proxy:
+Https Proxy:
+No Proxy: 
+```
