@@ -1,7 +1,7 @@
 server:
   image: cloudandbigdatalab/server:tutorial-2
   ports:
-    - "80"
+    - "80:80"
   links:
     - page:page
 
