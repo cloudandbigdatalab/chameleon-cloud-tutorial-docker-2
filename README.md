@@ -69,14 +69,18 @@ sudo docker-compose -p tutorial up -d
 
 `-p tutorial` specifies our project name. Otherwise it uses the name of the current directory.
 
-The below command should show your running containers.
+Check your running containers.
 
 ```sh
 sudo docker-compose -p tutorial ps
+```
 
+```sh
 Name                     Command               State              Ports
 ----------------------------------------------------------------------------------------
 tutorial_db_1       /docker-entrypoint.sh postgres   Up      5432/tcp
 tutorial_page_1     ./startup.sh                     Up      3031/tcp
 tutorial_server_1   nginx -g daemon off;             Up      443/tcp, 0.0.0.0:80->80/tcp
 ```
+
+Now if you visit the ip of your Chameleon machine in the browser you should see the page running.
