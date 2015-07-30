@@ -30,9 +30,9 @@ We'll be using the default Chameleon CentOS image for this tutorial.
 ```sh
 sudo yum update -y
 
-sudo yum install -y docker curl
+sudo yum install -y docker
 
-sudo service docker start
+sudo systemctl start docker.service
 ```
 
 Then follow these instructions to install [Machine](https://docs.docker.com/machine/#installation) and [Compose](https://docs.docker.com/compose/install/). **If you're getting "Permission Denied" using curl, run `sudo -i` to become root, run the commands, then `exit`.**
