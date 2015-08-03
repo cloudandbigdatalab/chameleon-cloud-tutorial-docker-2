@@ -21,6 +21,8 @@ eval "$(docker-machine env main)"
 
 export SWARM_TOKEN=$(docker run swarm create)
 
+# b3e9e19dd5b5c6d1b38a3f4be18b4918
+
 # swarm master
 
 docker-machine --debug create \
