@@ -1,6 +1,0 @@
-worker:
-  build: ./
-  environment:
-    - OUTPUT_FILE="example.txt"
-  volumes:
-    - /Users/shawnaten/Desktop:/outdir/
