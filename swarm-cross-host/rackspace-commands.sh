@@ -3,7 +3,7 @@ docker-machine --debug create \
     --engine-install-url="https://experimental.docker.com" \
     docker-main
 
-eval "$(docker-machine env main)"
+eval "$(docker-machine env docker-main)"
 
 export SWARM_TOKEN=$(docker run swarm create)
 
