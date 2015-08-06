@@ -1,6 +1,6 @@
 worker:
-  build: ./processing
+  build: ./
   environment:
-    - OUTPUT_FILE="array.out.txt"
+    - OUTPUT_FILE="example.txt"
   volumes:
-    - /home/cc/output/:/outdir/
+    - /Users/shawnaten/Desktop:/outdir/
