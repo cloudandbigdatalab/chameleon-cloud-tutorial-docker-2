@@ -47,7 +47,7 @@ docker $(docker-machine config swarm-0) run -d \
         --strategy spread \
         "token://$SWARM_TOKEN"
 
-docker-machine --debug create \
+docker-machine create \
     -d rackspace \
     --rackspace-image-id="668b0764-4936-4eec-a2f2-3b5bb2c40b26" \
     --engine-install-url="https://experimental.docker.com" \
