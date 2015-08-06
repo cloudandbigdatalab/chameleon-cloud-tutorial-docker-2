@@ -1,0 +1,6 @@
+worker:
+  build: ./processing
+  environment:
+    - OUTPUT_FILE="array.out.txt"
+  volumes:
+    - /home/cc/output/:/outdir/
