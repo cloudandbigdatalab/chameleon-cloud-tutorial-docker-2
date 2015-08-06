@@ -12,7 +12,8 @@ RUN apt-get install -y cmake libgtk2.0-dev pkg-config libavcodec-dev libavformat
 
 RUN apt-get install -y libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
 
-RUN pip install numpy scipy scikit-image
+RUN apt-get install -y python-scipy
+RUN pip install scikit-image
 
 WORKDIR opencv-build
 
