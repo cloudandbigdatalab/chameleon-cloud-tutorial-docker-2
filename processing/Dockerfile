@@ -1,6 +1,6 @@
 # http://docs.opencv.org/3.0-last-rst/doc/tutorials/introduction/linux_install/linux_install.html
 
-FROM ubuntu
+FROM python:2
 
 MAINTAINER shawnmaten@gmail.com
 
@@ -10,7 +10,9 @@ RUN apt-get install -y build-essential
 
 RUN apt-get install -y cmake libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
 
-RUN apt-get install -y python3.4 python3.4-dev python3-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
+RUN apt-get install -y libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
+
+RUN pip install numpy scipy scikit-image
 
 WORKDIR opencv-build
 
@@ -29,11 +31,11 @@ WORKDIR /opencv-build/opencv-3.0.0/build/
 RUN cmake -D CMAKE_BUILD_TYPE=Release \
 -D CMAKE_INSTALL_PREFIX=/usr/local \
 -D OPENCV_EXTRA_MODULES_PATH=/opencv-build/opencv_contrib-3.0.0/modules/ \
--D PYTHON3_EXECUTABLE=/usr/bin/python3 \
--D PYTHON_INCLUDE_DIR=/usr/include/python3.4 \
--D PYTHON_INCLUDE_DIR2=/usr/include/x86_64-linux-gnu/python3.4m/ \
--D PYTHON_LIBRARY=/usr/lib/x86_64-linux-gnu/libpython3.4m.so \
--D PYTHON3_NUMPY_INCLUDE_DIRS=/usr/lib/python3/dist-packages/numpy/core/include/ \
+-D PYTHON2_EXECUTABLE=/usr/local/bin/python \
+-D PYTHON_INCLUDE_DIR=/usr/local/include/python2.7 \
+#-D PYTHON_INCLUDE_DIR2=/usr/include/x86_64-linux-gnu/python3.4m/ \
+-D PYTHON_LIBRARY=/usr/local/lib/libpython2.7.so \
+-D PYTHON2_NUMPY_INCLUDE_DIRS=/usr/lib/python2.7/dist-packages/numpy/core/include/ \
 ..
 
 RUN make -j8
@@ -43,17 +45,3 @@ RUN make install
 WORKDIR /
 
 RUN rm -rf /opencv-build
-
-RUN apt-get install -y python3-pip
-
-RUN pip3 install uwsgi django numpy
-
-COPY opencv_site /opencv/opencv_site/
-
-COPY uwsgi.ini /opencv/
-
-WORKDIR /opencv
-
-EXPOSE 3031
-
-CMD uwsgi uwsgi.ini
