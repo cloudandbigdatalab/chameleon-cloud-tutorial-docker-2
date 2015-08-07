@@ -1,0 +1,7 @@
+worker:
+  build: .
+  volumes:
+    - /root/processing/:/indir/
+  environment:
+    - FILE=/indir/OSD-13.png
+    - LEVEL=2
