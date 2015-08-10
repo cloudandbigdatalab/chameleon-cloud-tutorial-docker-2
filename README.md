@@ -1,5 +1,5 @@
-# Chameleon Cloud Tutorial - Docker 2
-## Machine, Compose, and Swarm
+# Chameleon Cloud Tutorial
+## Docker 2 - Machine, Compose, and Swarm
 
 **Because of incompatibilities, part of this tutorial uses the Rackspace instead of Chameleon. See the [Machine](#machine) section for details.**
 
@@ -299,7 +299,7 @@ You can also setup a Swarm cluster across different providers. For example we co
 
 ```sh
 docker-machine create -d digitalocean --swarm \
-  --swarm-discovery=token://$SWARM_TOKEN docker-swarm-node-$i;
+  --swarm-discovery=token://$SWARM_TOKEN docker-swarm-node-<i>;
 ```
 
 and have a mixed cluster. In testing this worked just as well as if when they were on the same provider.
