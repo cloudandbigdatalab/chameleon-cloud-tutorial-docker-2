@@ -5,7 +5,7 @@
 **Program Solicitation # NSF 13-602**  
 **CISE Research Infrastructure: Mid-Scale Infrastructure - NSFCloud (CRI: NSFCloud)**
 
-**Because of incompatibilities, part of this tutorial uses the Rackspace instead of Chameleon. See the [Machine](#machine) section for details.**
+**Because of incompatibilities, part of this tutorial uses Rackspace instead of Chameleon. See the [Machine](#machine) section for details.**
 
 This tutorial will cover using Docker Machine, Compose and Swarm. Ultimately these tools are intended to be used together but because they're not yet mature that synthesis is limited. We'll discuss the limitations in more detail throughout the tutorial. We'll instead focus on using each tool individually and demonstrate them together in ways that currently work.
 
