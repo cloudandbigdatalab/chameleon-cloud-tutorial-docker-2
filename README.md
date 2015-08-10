@@ -1,5 +1,9 @@
 # Chameleon Cloud Tutorial
-## Docker 2 - Machine, Compose, and Swarm
+### Docker 2 - Machine, Compose, and Swarm
+
+**National Science Foundation**  
+**Program Solicitation # NSF 13-602**  
+**CISE Research Infrastructure: Mid-Scale Infrastructure - NSFCloud (CRI: NSFCloud)**
 
 **Because of incompatibilities, part of this tutorial uses the Rackspace instead of Chameleon. See the [Machine](#machine) section for details.**
 
