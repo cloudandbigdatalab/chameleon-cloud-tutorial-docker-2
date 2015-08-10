@@ -53,7 +53,7 @@ If you're going to try to use Machine with Rackspace, VM's, or another provider 
 
 ## Compose
 
-With Compose you outline your container configuration and arrangement with a YAML file name docker-compose.yml. Our [docker-compose.yml](https://github.com/cloudandbigdatalab/chameleon-cloud-tutorial-docker-2/raw/master/docker-compose.yml) is on our GitHub. This lays out the 3 container composition. In our docker-compose.yml we specify to pull out images from Docker Hub. All the resources, including the Dockerfile, to build these images is available on our [GitHub](https://github.com/cloudandbigdatalab/chameleon-cloud-tutorial-docker-2). If you wanted to build the images yourself or make modifications, download the repo then change
+With Compose you outline your container configuration and arrangement with a YAML file name docker-compose.yml. Our [docker-compose.yml](https://github.com/cloudandbigdatalab/chameleon-cloud-tutorial-docker-2/blob/master/docker-compose.yml) is on our GitHub. This lays out the 3 container composition. In our docker-compose.yml we specify to pull out images from Docker Hub. All the resources, including the Dockerfile, to build these images is available on our [GitHub](https://github.com/cloudandbigdatalab/chameleon-cloud-tutorial-docker-2). If you wanted to build the images yourself or make modifications, download the repo then change
 
 ```yml
 image: cloudandbigdatalab/server:tutorial-2
@@ -161,7 +161,7 @@ For this demo we can't really use the multi-container setup we used earlier. Thi
 
 2. Even with cross-host linking, there's no automatic proxying or load balancing. So if for example we scaled the page container to 10, that's easy enough. But we'd also have to configure Nginx to load balance between those containers. Or we could have a proxy container in between the two. This is all possible but again we didn't get it working at the time of this writing. This is something you must build into your app design, there's no automatic mechanisms for this as of yet.
 
-We're still using an (extremely sparse) [docker-compose.yml](https://github.com/cloudandbigdatalab/chameleon-cloud-tutorial-docker-2/raw/master/swarm/docker-compose.yml) for this. It consists of one service / container that runs [folding@home](https://folding.stanford.edu). We're going to run it and scale it across a few nodes.
+We're still using an (extremely sparse) [docker-compose.yml](https://github.com/cloudandbigdatalab/chameleon-cloud-tutorial-docker-2/blob/master/swarm/docker-compose.yml) for this. It consists of one service / container that runs [folding@home](https://folding.stanford.edu). We're going to run it and scale it across a few nodes.
 
 ### Generate Swarm Token
 
